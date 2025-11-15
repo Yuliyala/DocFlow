@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B24C8C032EC604B700832EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B24C8C022EC604B700832EA4 /* SnapKit */; };
+		B28E77272EC4D54800D0CB8A /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77262EC4D54800D0CB8A /* ApphudSDK */; };
+		B28E772F2EC4D5A200D0CB8A /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */; };
+		B28E77322EC4D67400D0CB8A /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */; };
+		B28E773A2EC4D70300D0CB8A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77392EC4D70300D0CB8A /* KeychainAccess */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B28E760C2EC32E7D00D0CB8A /* DocFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B28E772F2EC4D5A200D0CB8A /* SwiftEntryKit in Frameworks */,
+				B28E77272EC4D54800D0CB8A /* ApphudSDK in Frameworks */,
+				B28E773A2EC4D70300D0CB8A /* KeychainAccess in Frameworks */,
+				B28E77322EC4D67400D0CB8A /* FirebaseRemoteConfig in Frameworks */,
+				B24C8C032EC604B700832EA4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +91,11 @@
 			);
 			name = DocFlow;
 			packageProductDependencies = (
+				B28E77262EC4D54800D0CB8A /* ApphudSDK */,
+				B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */,
+				B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */,
+				B28E77392EC4D70300D0CB8A /* KeychainAccess */,
+				B24C8C022EC604B700832EA4 /* SnapKit */,
 			);
 			productName = DocFlow;
 			productReference = B28E760C2EC32E7D00D0CB8A /* DocFlow.app */;
@@ -107,6 +125,13 @@
 			);
 			mainGroup = B28E76032EC32E7D00D0CB8A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */,
+				B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
+				B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B28E760D2EC32E7D00D0CB8A /* Products */;
 			projectDirPath = "";
@@ -149,7 +174,6 @@
 				INFOPLIST_FILE = DocFlow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -180,7 +204,6 @@
 				INFOPLIST_FILE = DocFlow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -341,6 +364,77 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apphud/ApphudSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huri000/SwiftEntryKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.5.0;
+			};
+		};
+		B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B24C8C022EC604B700832EA4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		B28E77262EC4D54800D0CB8A /* ApphudSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */;
+			productName = ApphudSDK;
+		};
+		B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
+			productName = SwiftEntryKit;
+		};
+		B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		B28E77392EC4D70300D0CB8A /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B28E76042EC32E7D00D0CB8A /* Project object */;
 }

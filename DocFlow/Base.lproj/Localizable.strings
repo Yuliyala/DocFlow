@@ -1,0 +1,170 @@
+/* Splash */
+"splash.welcome" = "Welcome to";
+"splash.app_name" = "PDF Editor";
+
+/* Onboarding */
+"onboarding.first.title" = "PDF Scanner";
+"onboarding.first.description" = "Easily scan documents with professional quality right from your device, anytime.";
+"onboarding.second.title" = "PDF Editor";
+"onboarding.second.description" = "Edit your PDF files with ease—fast, precise, and hassle-free.";
+"onboarding.third.title" = "Convert to PDF";
+"onboarding.third.description" = "Instantly turn your files into PDFs for easy viewing and sharing.";
+"onboarding.button.continue" = "Continue";
+
+/* Onboarding Paywall */
+"onboarding.paywall.title" = "Get Full Access Today";
+"onboarding.paywall.description_with_trial" = "Enjoy full access with your subscription to Edit PDF files, Convert all file formats to PDF, Scan and Print files, Sign Documents for %@ per %@ after a %@ trial.";
+"onboarding.paywall.description_no_trial" = "Enjoy full access with your subscription to Edit PDF files, Convert all file formats to PDF, Scan and Print files, Sign Documents for %@ per %@.";
+
+/* Paywall */
+"paywall.title" = "Unlock Full Access\nto PDF Editor";
+"paywall.trial.title" = "Unlock Full Access\nto PDF Editor";
+"paywall.button.continue" = "Continue";
+"paywall.button.restore" = "Restore";
+
+/* Paywall Selector */
+"paywall.selector.trial" = "%@ of Trial";
+"paywall.selector.best_price" = "Best Price";
+"paywall.selector.popular" = "Popular";
+"paywall.selector.week_title" = "Week";
+"paywall.selector.month_title" = "Month";
+"paywall.selector.then" = "then";
+"paywall.selector.week" = "week";
+"paywall.selector.secure" = "Secure payment";
+"paywall.trial.button.title" = "Start %@-Day Trial, then %@/week";
+"paywall.subcribe.button.title" = "Subscribe for %@";
+
+/* Trial Categories */
+"trial.category.scanner" = "Scanning & Printing";
+"trial.category.editor" = "Edit PDF Files";
+"trial.category.converter" = "Converter All File Formats";
+
+/* Trial Categories Descriptions */
+"trial.category.scanner.description" = "Turn paper into digital files and print with ease.";
+"trial.category.editor.description" = "Customize your PDFs with intuitive editing tools.";
+"trial.category.converter.description" = "Easily convert any file type to PDF in seconds.";
+
+/* Limited Paywall */
+"limited.offer.label" = "Limited Offer";
+"limited.title.premium" = "Premium Access";
+"limited.title.discount" = "%@%% OFF";
+"limited.trial.label" = "%@ FREE";
+"limited.price.format" = "Then %@ %@ per %@";
+"limited.price.format.notrial" = "Just %@ per %@";
+"limited.expires.label" = "Offer expires in:";
+"limited.timer.placeholder" = "00h:00m:00s";
+
+/* Security */
+"security.message" = "Secure payment";
+"security.full_message" = "Secured by the App Store. Cancel anytime";
+
+/* Terms */
+"terms.agreement" = "By continuing with your payment, you agree to our Terms of Service and Privacy Policy";
+"terms.terms_of_use" = "Terms of Service";
+"terms.privacy_policy" = "Privacy Policy";
+
+/* Subscription Duration */
+"duration.days" = "%d days";
+"duration.week" = "3 days";
+"duration.month" = "month";
+"duration.year" = "year";
+
+/* Errors */
+"restore.error.text" = "No purchases found";
+"restore.failure.title" = "Restore Failed";
+"restore.failure.ok" = "OK";
+"restore.success.title" = "Restore Successful";
+"restore.success.message" = "Your purchases have been restored";
+"restore.success.ok" = "OK";
+"subscription.error.title" = "Purchase Failed";
+"subscription.error.message" = "Something went wrong. Please try again.";
+"subscription.error.ok" = "OK";
+
+/* Network */
+"network.error.title" = "No Internet Connection";
+"network.error.message" = "Please check your internet connection and try again.";
+"network.error.ok" = "Retry";
+"network.error.cancel" = "Continue";
+
+/* Delete */
+"delete.title" = "Delete";
+"delete.message" = "Are you sure you want to delete this item?";
+"delete.cancel" = "Cancel";
+"delete.delete" = "Delete";
+
+/* Mail */
+"mail.title" = "Support Request";
+"paywall.selector.secure" = "Secure payment";
+
+/* Limited Paywall */
+"limited.offer.label" = "LIMITED OFFER";
+"limited.trial.label" = "%@ TRIAL";
+"limited.expires.label" = "Expires in:";
+"limited.timer.placeholder" = "00h:00m:00s";
+"limited.title.premium" = "Premium";
+"limited.title.discount" = "%@% OFF";
+"limited.price.format" = "From %@ %@ per %@";
+"limited.price.format.notrial" = "%@ %@ per %@";
+
+/* Terms */
+"terms.agreement" = "By continuing with your payment, you agree to our Terms of Service and Privacy Policy";
+"terms.terms_of_use" = "Terms of Service";
+"terms.privacy_policy" = "Privacy Policy";
+
+/* Security */
+"security.message" = "Secure payment";
+
+/* Duration */
+"duration.days" = "%d days";
+"duration.week" = "Week";
+"duration.month" = "Month";
+"duration.year" = "Year";
+
+/* Restore */
+"restore.error.text" = "No purchases found to restore";
+"restore.failure.title" = "Restore Failed";
+"restore.failure.ok" = "OK";
+"restore.success.title" = "Restore Successful";
+"restore.success.message" = "Your purchases have been restored";
+"restore.success.ok" = "OK";
+
+/* Subscription */
+"subscription.error.title" = "Subscription Error";
+"subscription.error.message" = "Unable to complete purchase. Please try again.";
+"subscription.error.ok" = "OK";
+
+/* Network */
+"network.error.title" = "No Internet Connection";
+"network.error.message" = "Please check your internet connection and try again.";
+"network.error.ok" = "Retry";
+"network.error.cancel" = "Continue Offline";
+
+/* Camera */
+"camera.access.title" = "Camera Access Required";
+"camera.access.message" = "Please allow camera access to scan documents.";
+"camera.access.cancel" = "Cancel";
+"camera.access.settings" = "Settings";
+
+/* Delete */
+"delete.title" = "Delete";
+"delete.message" = "Are you sure you want to delete this item?";
+"delete.cancel" = "Cancel";
+"delete.delete" = "Delete";
+
+/* Mail */
+"mail.title" = "PDF Editor Support";
+
+/* Attention */
+"attention.title" = "Attention";
+"attention.message" = "Please note that this app requires certain permissions to function properly.";
+
+/* Tabs */
+"tab.health" = "Home";
+"tab.articles" = "Tools";
+"tab.settings" = "Documents";
+"tab.profile" = "Profile";
+
+/* Paywall Trial Button */
+"paywall.trial.button.title" = "Start %@ Trial, Then %@";
+"paywall.subcribe.button.title" = "Subscribe for %@";
+
