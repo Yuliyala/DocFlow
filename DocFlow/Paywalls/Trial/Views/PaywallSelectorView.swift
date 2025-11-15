@@ -245,14 +245,6 @@ class PaywallSelectorSection: UIView {
 
     func setSelected(_ isSelected: Bool) {
         radioButton.setChecked(isSelected, animated: true)
-        
-        if isSelected {
-            backgroundImageView.layer.borderWidth = 1
-            backgroundImageView.layer.borderColor = UIColor.accent.cgColor
-        } else {
-            backgroundImageView.layer.borderWidth = 0
-            backgroundImageView.layer.borderColor = nil
-        }
     }
     
     func configure(infoText: String?, title: String, price: String, weeklyPrice: String, backgroundImage: String) {
