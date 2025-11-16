@@ -13,7 +13,7 @@ class LimitedView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.spacing = 16
+        stackView.spacing = 8
         return stackView
     }()
 
@@ -79,7 +79,6 @@ class LimitedView: UIView {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
@@ -95,10 +94,10 @@ class LimitedView: UIView {
 
     private let trialLabel: CapsuledLabel = {
         let label = CapsuledLabel()
-        label.font = .zalandoSans(.semiBold, size: 14)
+        label.font = .zalandoSans(.medium, size: 14)
         label.textColor = .white
         label.backgroundColor = .accent
-        label.insets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+        label.insets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
         label.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), "")
         return label
     }()
@@ -131,7 +130,7 @@ class LimitedView: UIView {
     private let timerCapsuleView: CapsuleContentView = {
         let capsule = CapsuleContentView()
         capsule.contentBackgroundColor = .white
-        capsule.contentInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        capsule.contentInsets = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
         capsule.spacing = 8
         return capsule
     }()
@@ -237,7 +236,7 @@ class LimitedView: UIView {
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(headerStackView.snp.bottom).offset(8)
+            $0.top.equalTo(headerStackView.snp.bottom).offset(2)
             $0.left.right.equalToSuperview().inset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).offset(-8)
         }
@@ -287,6 +286,8 @@ class LimitedView: UIView {
         configurePriceLabel(price: price, discountPrice: discountPrice, isGreyFlow: isGreyFlow, isTrial: hasTrial, subscriptionDuration: subscriptionDuration)
         timerLabel.text = expires
         trialLabel.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), trialDuration.uppercased())
+        
+        trialLabel.font = isGreyFlow ? .zalandoSans(.medium, size: 24) : .zalandoSans(.medium, size: 14)
         
         if isGreyFlow {
             continueButton.setTitle(NSLocalizedString("limited.button.try_free", comment: "Try Free button"), for: .normal)
