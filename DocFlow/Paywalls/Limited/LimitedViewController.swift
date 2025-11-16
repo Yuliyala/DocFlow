@@ -12,6 +12,7 @@ class LimitedViewController: UIViewController {
     
     // 🔧 ВРЕМЕННО для тестирования дизайна - удалить потом!
     var forceGreyFlowMode: Bool? = nil
+    var forceTrialMode: Bool? = nil
 
     var rootView: LimitedView {
         return view as! LimitedView
@@ -38,11 +39,12 @@ class LimitedViewController: UIViewController {
         let discountPrice = product?.price ?? 0
         let discountPercentage = (price - discountPrice) / price * 100
     
-        let trialDuration = appHudService.trialDuration(for: appHudService.limitedProduct)?.title ?? ""
-        let subscriptionDuration = appHudService.durationProduct(for: appHudService.limitedProduct)?.title ?? ""
+        let trialDuration = appHudService.trialDuration(for: appHudService.limitedProduct)?.title ?? "3 Days"
+        let subscriptionDuration = appHudService.durationProduct(for: appHudService.limitedProduct)?.title ?? "week"
         
-        // 🔧 ВРЕМЕННО: используем forceGreyFlowMode если он установлен
+        // 🔧 ВРЕМЕННО: используем forceGreyFlowMode и forceTrialMode если они установлены
         let isGreyFlow = forceGreyFlowMode ?? FirebaseService.shared.isGreyFlow
+        let hasTrial = forceTrialMode ?? appHudService.hasLimitedTrial
         
         rootView.configure(
             discount: String(NSDecimalNumber(decimal: discountPercentage).int32Value),
@@ -50,7 +52,7 @@ class LimitedViewController: UIViewController {
             discountPrice: dicsountDisplayPrice,
             expires: getCurrentTimerString(),
             isGreyFlow: isGreyFlow,
-            hasTrial: appHudService.hasLimitedTrial,
+            hasTrial: hasTrial,
             trialDuration: trialDuration,
             subscriptionDuration: subscriptionDuration
         )

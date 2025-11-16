@@ -93,10 +93,12 @@ class LimitedView: UIView {
         return stackView
     }()
 
-    private let trialLabel: UILabel = {
-        let label = UILabel()
-        label.font = .zalandoSans(.semiBold, size: 16)
-        label.textColor = .accent
+    private let trialLabel: CapsuledLabel = {
+        let label = CapsuledLabel()
+        label.font = .zalandoSans(.semiBold, size: 14)
+        label.textColor = .white
+        label.backgroundColor = .accent
+        label.insets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
         label.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), "")
         return label
     }()
@@ -126,12 +128,26 @@ class LimitedView: UIView {
         return label
     }()
 
-    private let timerLabel: CapsuledLabel = {
-        let label = CapsuledLabel()
-        label.font = .zalandoSans(.medium, size: 22)
-        label.textColor = .accent
-        label.backgroundColor = .white
-        label.insets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+    private let timerCapsuleView: CapsuleContentView = {
+        let capsule = CapsuleContentView()
+        capsule.contentBackgroundColor = .white
+        capsule.contentInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        capsule.spacing = 8
+        return capsule
+    }()
+    
+    private let clockImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .clock
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .accent
+        return imageView
+    }()
+    
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.font = .zalandoSans(.medium, size: 18)
+        label.textColor = .textPrimary
         label.text = NSLocalizedString("limited.timer.placeholder", comment: "Timer placeholder")
         return label
     }()
@@ -190,8 +206,10 @@ class LimitedView: UIView {
             categoriesStackView.addArrangedSubview(capsuleView)
         }
         
-        [trialLabel, priceLabel].forEach { priceStackView.addArrangedSubview($0) }
-        [expiresLabel, timerLabel].forEach { timerStackView.addArrangedSubview($0) }
+        timerCapsuleView.setContent([clockImageView, timerLabel])
+        timerCapsuleView.customCornerRadius = 10
+        
+        [trialLabel, priceLabel, timerCapsuleView].forEach { priceStackView.addArrangedSubview($0) }
         [securedView, continueButton, termsTextView].forEach { buttonStackView.addArrangedSubview($0) }
         buttonStackView.setCustomSpacing(16, after: securedView)
         buttonStackView.setCustomSpacing(8, after: continueButton)
@@ -202,7 +220,6 @@ class LimitedView: UIView {
             titleLabel,
             categoriesStackView,
             priceStackView,
-            timerStackView,
             buttonStackView,
         ].forEach { stackView.addArrangedSubview($0) }
         
@@ -243,6 +260,10 @@ class LimitedView: UIView {
             $0.left.right.equalToSuperview().inset(16)
         }
         
+        clockImageView.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+        }
+        
         continueButton.snp.makeConstraints {
             $0.height.equalTo(56)
             $0.width.equalTo(stackView)
@@ -265,7 +286,6 @@ class LimitedView: UIView {
         configureTitleLabel()
         configurePriceLabel(price: price, discountPrice: discountPrice, isGreyFlow: isGreyFlow, isTrial: hasTrial, subscriptionDuration: subscriptionDuration)
         timerLabel.text = expires
-        trialLabel.font = isGreyFlow ? .zalandoSans(.semiBold, size: 28) : .zalandoSans(.semiBold, size: 16)
         trialLabel.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), trialDuration.uppercased())
         
         if isGreyFlow {
@@ -279,6 +299,7 @@ class LimitedView: UIView {
             continueButton.setTitle(NSLocalizedString("paywall.button.continue", comment: "Continue button"), for: .normal)
             closeButton.alpha = 0.15
         }
+        
         trialLabel.isHidden = !hasTrial
     }
 

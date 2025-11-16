@@ -114,6 +114,7 @@ class TabBarController: UITabBarController {
     @objc private func showLimitedPaywallWhite() {
         let limitedVC = LimitedViewController()
         limitedVC.forceGreyFlowMode = false // 🔧 ВРЕМЕННО: принудительно устанавливаем белый режим
+        limitedVC.forceTrialMode = true // 🔧 ВРЕМЕННО: включаем trial для тестирования
         limitedVC.modalPresentationStyle = .fullScreen
         present(limitedVC, animated: true)
     }
@@ -121,6 +122,7 @@ class TabBarController: UITabBarController {
     @objc private func showLimitedPaywallGrey() {
         let limitedVC = LimitedViewController()
         limitedVC.forceGreyFlowMode = true // 🔧 ВРЕМЕННО: принудительно устанавливаем серый режим
+        limitedVC.forceTrialMode = true // 🔧 ВРЕМЕННО: включаем trial для тестирования
         limitedVC.modalPresentationStyle = .fullScreen
         present(limitedVC, animated: true)
     }
