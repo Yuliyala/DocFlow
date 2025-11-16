@@ -9,6 +9,9 @@ class LimitedViewController: UIViewController {
     private let appHudService: AppHudService = .shared
     var product: Product?
     var isLoading = false
+    
+    // 🔧 ВРЕМЕННО для тестирования дизайна - удалить потом!
+    var forceGreyFlowMode: Bool? = nil
 
     var rootView: LimitedView {
         return view as! LimitedView
@@ -37,12 +40,16 @@ class LimitedViewController: UIViewController {
     
         let trialDuration = appHudService.trialDuration(for: appHudService.limitedProduct)?.title ?? ""
         let subscriptionDuration = appHudService.durationProduct(for: appHudService.limitedProduct)?.title ?? ""
+        
+        // 🔧 ВРЕМЕННО: используем forceGreyFlowMode если он установлен
+        let isGreyFlow = forceGreyFlowMode ?? FirebaseService.shared.isGreyFlow
+        
         rootView.configure(
             discount: String(NSDecimalNumber(decimal: discountPercentage).int32Value),
             price: displayPrice,
             discountPrice: dicsountDisplayPrice,
             expires: getCurrentTimerString(),
-            isGreyFlow: FirebaseService.shared.isGreyFlow,
+            isGreyFlow: isGreyFlow,
             hasTrial: appHudService.hasLimitedTrial,
             trialDuration: trialDuration,
             subscriptionDuration: subscriptionDuration

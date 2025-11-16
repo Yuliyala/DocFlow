@@ -41,9 +41,27 @@ class TabBarController: UITabBarController {
         onboardingButton.titleLabel?.font = .zalandoSans(.medium, size: 16)
         onboardingButton.addTarget(self, action: #selector(showOnboardingPaywall), for: .touchUpInside)
         
+        let limitedWhiteButton = UIButton(type: .system)
+        limitedWhiteButton.setTitle("🎨 Limited Paywall (White)", for: .normal)
+        limitedWhiteButton.backgroundColor = UIColor(hex: "#4A90E2")
+        limitedWhiteButton.setTitleColor(.white, for: .normal)
+        limitedWhiteButton.layer.cornerRadius = 12
+        limitedWhiteButton.titleLabel?.font = .zalandoSans(.medium, size: 16)
+        limitedWhiteButton.addTarget(self, action: #selector(showLimitedPaywallWhite), for: .touchUpInside)
+        
+        let limitedGreyButton = UIButton(type: .system)
+        limitedGreyButton.setTitle("🎨 Limited Paywall (Grey)", for: .normal)
+        limitedGreyButton.backgroundColor = UIColor(hex: "#7D7D7D")
+        limitedGreyButton.setTitleColor(.white, for: .normal)
+        limitedGreyButton.layer.cornerRadius = 12
+        limitedGreyButton.titleLabel?.font = .zalandoSans(.medium, size: 16)
+        limitedGreyButton.addTarget(self, action: #selector(showLimitedPaywallGrey), for: .touchUpInside)
+        
         stackView.addArrangedSubview(trialButton)
         stackView.addArrangedSubview(noTrialButton)
         stackView.addArrangedSubview(onboardingButton)
+        stackView.addArrangedSubview(limitedWhiteButton)
+        stackView.addArrangedSubview(limitedGreyButton)
         
         view.addSubview(stackView)
         
@@ -56,6 +74,14 @@ class TabBarController: UITabBarController {
         }
         
         onboardingButton.snp.makeConstraints {
+            $0.height.equalTo(56)
+        }
+        
+        limitedWhiteButton.snp.makeConstraints {
+            $0.height.equalTo(56)
+        }
+        
+        limitedGreyButton.snp.makeConstraints {
             $0.height.equalTo(56)
         }
         
@@ -83,6 +109,20 @@ class TabBarController: UITabBarController {
         let onboardingPaywallVC = OnboardingPaywallViewController()
         onboardingPaywallVC.modalPresentationStyle = .fullScreen
         present(onboardingPaywallVC, animated: true)
+    }
+    
+    @objc private func showLimitedPaywallWhite() {
+        let limitedVC = LimitedViewController()
+        limitedVC.forceGreyFlowMode = false // 🔧 ВРЕМЕННО: принудительно устанавливаем белый режим
+        limitedVC.modalPresentationStyle = .fullScreen
+        present(limitedVC, animated: true)
+    }
+    
+    @objc private func showLimitedPaywallGrey() {
+        let limitedVC = LimitedViewController()
+        limitedVC.forceGreyFlowMode = true // 🔧 ВРЕМЕННО: принудительно устанавливаем серый режим
+        limitedVC.modalPresentationStyle = .fullScreen
+        present(limitedVC, animated: true)
     }
 }
 

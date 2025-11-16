@@ -44,6 +44,14 @@
 "trial.category.editor.description" = "Customize your PDFs with intuitive editing tools.";
 "trial.category.converter.description" = "Easily convert any file type to PDF in seconds.";
 
+/* Paywall Categories */
+"paywall.category.edit.title" = "Edit PDF Files";
+"paywall.category.edit.description" = "Customize your PDFs with intuitive editing tools.";
+"paywall.category.convert.title" = "Converter All File Formats";
+"paywall.category.convert.description" = "Easily convert any file type to PDF in seconds.";
+"paywall.category.scan.title" = "Scanning & Printing";
+"paywall.category.scan.description" = "Turn paper into digital files and print with ease.";
+
 /* Limited Paywall */
 "limited.offer.label" = "Limited Offer";
 "limited.title.premium" = "Premium Access";
@@ -97,14 +105,17 @@
 "paywall.selector.secure" = "Secure payment";
 
 /* Limited Paywall */
+"limited.time.offer" = "LIMITED-TIME OFFER";
 "limited.offer.label" = "LIMITED OFFER";
 "limited.trial.label" = "%@ TRIAL";
 "limited.expires.label" = "Expires in:";
 "limited.timer.placeholder" = "00h:00m:00s";
+"limited.title.full" = "Unlock Full Access\nto PDF Editor";
 "limited.title.premium" = "Premium";
 "limited.title.discount" = "%@% OFF";
 "limited.price.format" = "From %@ %@ per %@";
 "limited.price.format.notrial" = "%@ %@ per %@";
+"limited.button.try_free" = "Try Free";
 
 /* Terms */
 "terms.agreement" = "By continuing with your payment, you agree to our Terms of Service and Privacy Policy";

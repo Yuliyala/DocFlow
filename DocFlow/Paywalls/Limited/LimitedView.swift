@@ -1,10 +1,10 @@
 import UIKit
+import SnapKit
 
 class LimitedView: UIView {
 
     private let checkedBackgroundView: CheckedView = {
         let view = CheckedView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -13,7 +13,6 @@ class LimitedView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
         return stackView
     }()
@@ -23,66 +22,66 @@ class LimitedView: UIView {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    private let restoreButton: UIButton = {
+    let restoreButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString("paywall.button.restore", comment: "Restore button"), for: .normal)
         button.setTitleColor(.textSecondary, for: .normal)
         button.titleLabel?.font = .zalandoSans(.medium, size: 16)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = AppHudService.shared.hasSubscribed
         return button
     }()
 
-    private let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .textSecondary
-        button.translatesAutoresizingMaskIntoConstraints = false
+    let closeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "closeButton"), for: .normal)
         button.alpha = 0
         return button
     }()
 
-    private let iconView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(systemName: "doc.fill")
-        view.tintColor = .accent
-        view.contentMode = .scaleAspectFit
-        return view
+    private let confettiImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .confetti
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
-    private let titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 12
-        return stackView
-    }()
-
-    private let limitedOfferLabel: CapsuledLabel = {
-        let label = CapsuledLabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private let limitedTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("limited.time.offer", comment: "LIMITED-TIME OFFER")
         label.font = .zalandoSans(.semiBold, size: 16)
         label.textColor = .accent
-        label.text = NSLocalizedString("limited.offer.label", comment: "Limited offer label")
-        label.backgroundColor = .white
+        label.textAlignment = .center
         return label
+    }()
+
+    private let crownImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .crown
+        imageView.contentMode = .scaleAspectFill
+        return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .zalandoSans(.semiBold, size: 40)
+        label.font = .zalandoSans(.semiBold, size: 32)
         label.textColor = .textPrimary
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
+    }()
+
+    private let categoriesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
     }()
 
     private let priceStackView: UIStackView = {
@@ -90,14 +89,12 @@ class LimitedView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 8
         return stackView
     }()
 
     private let trialLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .zalandoSans(.semiBold, size: 16)
         label.textColor = .accent
         label.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), "")
@@ -106,7 +103,6 @@ class LimitedView: UIView {
 
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .zalandoSans(.semiBold, size: 22)
         label.textColor = .textPrimary
         label.textAlignment = .center
@@ -118,14 +114,12 @@ class LimitedView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 8
         return stackView
     }()
 
     private let expiresLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .zalandoSans(.medium, size: 16)
         label.textColor = .textPrimary
         label.text = NSLocalizedString("limited.expires.label", comment: "Expires label")
@@ -134,7 +128,6 @@ class LimitedView: UIView {
 
     private let timerLabel: CapsuledLabel = {
         let label = CapsuledLabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .zalandoSans(.medium, size: 22)
         label.textColor = .accent
         label.backgroundColor = .white
@@ -148,31 +141,27 @@ class LimitedView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 8
         return stackView
     }()
 
-    private let continueButton: UIButton = {
+    let continueButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString("paywall.button.continue", comment: "Continue button"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .zalandoSans(.medium, size: 16)
         button.backgroundColor = UIColor.accent
-        button.layer.cornerRadius = 28
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
         return button
     }()
 
     private let securedView: CapsuleContentView = {
         let view = CapsuleContentView.createSecurityCapsule()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private let termsTextView: TermsTextView = {
+    let termsTextView: TermsTextView = {
         let view = TermsTextView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -187,88 +176,133 @@ class LimitedView: UIView {
     }
 
     private func setupView() {
+        backgroundColor = .background
+        
         addSubview(checkedBackgroundView)
         addSubview(headerStackView)
         addSubview(stackView)
+        addSubview(confettiImageView)
 
         [restoreButton, .horizontalSpacer(), closeButton].forEach { headerStackView.addArrangedSubview($0) }
+        
+        LimitedViewCategory.allCases.forEach { category in
+            let capsuleView = capsuleViewForCategory(category)
+            categoriesStackView.addArrangedSubview(capsuleView)
+        }
+        
         [trialLabel, priceLabel].forEach { priceStackView.addArrangedSubview($0) }
         [expiresLabel, timerLabel].forEach { timerStackView.addArrangedSubview($0) }
-        [limitedOfferLabel, titleLabel].forEach { titleStackView.addArrangedSubview($0) }
         [securedView, continueButton, termsTextView].forEach { buttonStackView.addArrangedSubview($0) }
         buttonStackView.setCustomSpacing(16, after: securedView)
         buttonStackView.setCustomSpacing(8, after: continueButton)
 
         [
-            iconView,
-            titleStackView,
+            crownImageView,
+            limitedTimeLabel,
+            titleLabel,
+            categoriesStackView,
             priceStackView,
             timerStackView,
             buttonStackView,
         ].forEach { stackView.addArrangedSubview($0) }
+        
         setupConstraints()
     }
 
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            checkedBackgroundView.topAnchor.constraint(equalTo: topAnchor),
-            checkedBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            checkedBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            checkedBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            headerStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            headerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-
-            stackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 60),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-
-            continueButton.heightAnchor.constraint(equalToConstant: 56),
-            continueButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            iconView.heightAnchor.constraint(equalToConstant: isSmallScreen ? 80 : 120),
-            iconView.widthAnchor.constraint(equalToConstant: isSmallScreen ? 80 : 120),
-
-            closeButton.widthAnchor.constraint(equalToConstant: 24),
-            closeButton.heightAnchor.constraint(equalToConstant: 24),
-
-            termsTextView.heightAnchor.constraint(equalToConstant: 30),
-        ])
+        checkedBackgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        headerStackView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(8)
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(headerStackView.snp.bottom).offset(8)
+            $0.left.right.equalToSuperview().inset(16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).offset(-8)
+        }
+        
+        let crownSize: CGFloat = if isSmallScreen {
+            42
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            80
+        } else {
+            56
+        }
+        
+        crownImageView.snp.makeConstraints {
+            $0.width.height.equalTo(crownSize)
+        }
+        
+        confettiImageView.snp.makeConstraints {
+            $0.centerX.equalTo(crownImageView)
+            $0.top.equalTo(crownImageView)
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        continueButton.snp.makeConstraints {
+            $0.height.equalTo(56)
+            $0.width.equalTo(stackView)
+        }
+        
+        closeButton.snp.makeConstraints {
+            $0.width.height.equalTo(16)
+        }
+        
+        termsTextView.snp.makeConstraints {
+            $0.height.equalTo(30)
+        }
+        
+        categoriesStackView.snp.makeConstraints {
+            $0.left.right.equalToSuperview()
+        }
     }
 
     func configure(discount: String, price: String, discountPrice: String, expires: String, isGreyFlow: Bool, hasTrial: Bool, trialDuration: String = "", subscriptionDuration: String) {
-        configureTitleLabel(discount: discount)
+        configureTitleLabel()
         configurePriceLabel(price: price, discountPrice: discountPrice, isGreyFlow: isGreyFlow, isTrial: hasTrial, subscriptionDuration: subscriptionDuration)
         timerLabel.text = expires
         trialLabel.font = isGreyFlow ? .zalandoSans(.semiBold, size: 28) : .zalandoSans(.semiBold, size: 16)
         trialLabel.text = String(format: NSLocalizedString("limited.trial.label", comment: "Trial label"), trialDuration.uppercased())
+        
         if isGreyFlow {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-                self.closeButton.alpha = 1
+            continueButton.setTitle(NSLocalizedString("limited.button.try_free", comment: "Try Free button"), for: .normal)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                UIView.animate(withDuration: 0.3) {
+                    self.closeButton.alpha = 0.15
+                }
             }
         } else {
-            closeButton.alpha = 1
+            continueButton.setTitle(NSLocalizedString("paywall.button.continue", comment: "Continue button"), for: .normal)
+            closeButton.alpha = 0.15
         }
         trialLabel.isHidden = !hasTrial
     }
 
-    private func configureTitleLabel(discount: String) {
-        let firstLine = NSLocalizedString("limited.title.premium", comment: "Premium title")
-        let secondLine = String(format: NSLocalizedString("limited.title.discount", comment: "Discount percentage"), discount)
-        let fullText = "\(firstLine)\n\(secondLine)"
-
+    private func configureTitleLabel() {
+        let fullText = NSLocalizedString("limited.title.full", comment: "Unlock Full Access\nto PDF Editor")
         let attributedString = NSMutableAttributedString(string: fullText)
 
-        let firstLineRange = NSRange(location: 0, length: firstLine.count)
-        attributedString.addAttribute(.font, value: UIFont.zalandoSans(.semiBold, size: isSmallScreen ? 30 : 40), range: firstLineRange)
-        attributedString.addAttribute(.foregroundColor, value: UIColor.textPrimary, range: firstLineRange)
+        let fullRange = NSRange(location: 0, length: fullText.count)
+        attributedString.addAttribute(.font, value: UIFont.zalandoSans(.semiBold, size: isSmallScreen ? 24 : 32), range: fullRange)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.textPrimary, range: fullRange)
 
-        let secondLineRange = NSRange(location: firstLine.count + 1, length: secondLine.count)
-        attributedString.addAttribute(.font, value: UIFont.zalandoSans(.semiBold, size: isSmallScreen ? 30 : 40), range: secondLineRange)
-        attributedString.addAttribute(.foregroundColor, value: UIColor.accent, range: secondLineRange)
+        if let pdfEditorRange = fullText.range(of: "PDF Editor") {
+            let nsRange = NSRange(pdfEditorRange, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.accent, range: nsRange)
+        }
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: fullRange)
 
         titleLabel.attributedText = attributedString
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
     }
 
     private func configurePriceLabel(price: String, discountPrice: String, isGreyFlow: Bool, isTrial: Bool, subscriptionDuration: String) {
@@ -313,6 +347,105 @@ class LimitedView: UIView {
     func updateTimerLabel(_ timerText: String) {
         timerLabel.text = timerText
     }
+    
+    private func capsuleViewForCategory(_ category: LimitedViewCategory) -> CapsuleContentView {
+        let capsuleView = CapsuleContentView()
+
+        let iconImageView = UIImageView()
+        iconImageView.image = category.icon
+        iconImageView.tintColor = .accent
+        iconImageView.contentMode = .scaleAspectFit
+        
+        let textStackView = UIStackView()
+        textStackView.axis = .vertical
+        textStackView.alignment = .leading
+        textStackView.distribution = .fill
+        textStackView.spacing = 2
+
+        let titleLabel = UILabel()
+        titleLabel.text = category.title
+        let fontSize: CGFloat = if isSmallScreen {
+            12
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            22
+        } else {
+            14
+        }
+        titleLabel.font = .zalandoSans(.medium, size: fontSize)
+        titleLabel.textColor = .textPrimary
+        titleLabel.numberOfLines = 1
+        
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = category.description
+        let descFontSize: CGFloat = if isSmallScreen {
+            10
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            16
+        } else {
+            12
+        }
+        descriptionLabel.font = .zalandoSans(.regular, size: descFontSize)
+        descriptionLabel.textColor = .textSecondary
+        descriptionLabel.numberOfLines = 1
+        
+        textStackView.addArrangedSubview(titleLabel)
+        textStackView.addArrangedSubview(descriptionLabel)
+
+        capsuleView.setContent([iconImageView, textStackView])
+        capsuleView.customCornerRadius = 24
+        capsuleView.contentInsets = UIEdgeInsets(top: 12, left: 8, bottom: 12, right: 8)
+
+        let iconSize: CGFloat = if isSmallScreen {
+           36
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+           64
+        } else {
+           48
+        }
+        
+        iconImageView.snp.makeConstraints {
+            $0.width.height.equalTo(iconSize)
+        }
+
+        return capsuleView
+    }
 }
 
-
+enum LimitedViewCategory: CaseIterable {
+    case editor
+    case converter
+    case scanner
+    
+    var title: String {
+        switch self {
+        case .editor:
+            return NSLocalizedString("paywall.category.edit.title", comment: "Edit PDF Files")
+        case .converter:
+            return NSLocalizedString("paywall.category.convert.title", comment: "Converter All File Formats")
+        case .scanner:
+            return NSLocalizedString("paywall.category.scan.title", comment: "Scanning & Printing")
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .editor:
+            return NSLocalizedString("paywall.category.edit.description", comment: "Customize your PDFs with intuitive editing tools.")
+        case .converter:
+            return NSLocalizedString("paywall.category.convert.description", comment: "Easily convert any file type to PDF in seconds.")
+        case .scanner:
+            return NSLocalizedString("paywall.category.scan.description", comment: "Turn paper into digital files and print with ease.")
+        }
+    }
+    
+    var icon: UIImage? {
+        switch self {
+        case .editor:
+            return .docIcon
+        case .converter:
+            return .pdfIcon
+        case .scanner:
+            return .scanningIcon
+        }
+    }
+}
