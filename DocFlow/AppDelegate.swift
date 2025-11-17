@@ -1,4 +1,3 @@
-
 import UIKit
 import FirebaseCore
 
@@ -6,14 +5,17 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Инициализация Firebase (безопасно)
         if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
            let options = FirebaseOptions(contentsOfFile: path),
            options.googleAppID != "1:YOUR_APP_ID:ios:YOUR_IOS_ID" {
             FirebaseApp.configure()
+            #if DEBUG
             print("✅ Firebase configured successfully")
+            #endif
         } else {
+            #if DEBUG
             print("⚠️ Firebase not configured - using placeholder GoogleService-Info.plist")
+            #endif
         }
         return true
     }
@@ -27,4 +29,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
 }
-

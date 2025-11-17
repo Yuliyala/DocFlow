@@ -17,9 +17,10 @@ class FirebaseService {
     }
 
     func setup() {
-        // Проверяем что Firebase настроен
         guard FirebaseApp.app() != nil else {
+            #if DEBUG
             print("⚠️ FirebaseService: Firebase not configured, skipping RemoteConfig setup")
+            #endif
             isConfigured = false
             return
         }
@@ -33,18 +34,22 @@ class FirebaseService {
     
     func load() async {
         guard isConfigured else {
+            #if DEBUG
             print("⚠️ FirebaseService: Skipping load - Firebase not configured")
+            #endif
             return
         }
         
         do {
             let status = try await remoteConfig?.fetch()
             try await remoteConfig?.activate()
+            #if DEBUG
             print("✅ Firebase RemoteConfig loaded successfully")
+            #endif
         } catch {
+            #if DEBUG
             print("❌ Firebase RemoteConfig error: \(error)")
+            #endif
         }
     }
 }
-
-

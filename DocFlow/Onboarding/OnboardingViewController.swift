@@ -8,9 +8,7 @@ class OnboardingViewController: UIViewController {
     }
 
     private let onboarding: Onboarding
-    private var onboardingView: OnboardingView {
-        return view as! OnboardingView
-    }
+    private let onboardingView = OnboardingView()
 
     init(onboarding: Onboarding) {
         self.onboarding = onboarding
@@ -22,7 +20,7 @@ class OnboardingViewController: UIViewController {
     }
 
     override func loadView() {
-        view = OnboardingView()
+        view = onboardingView
     }
 
     override func viewDidLoad() {
@@ -38,10 +36,6 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Анимация только для первого экрана
-//        if onboarding == .first {
-//            animateContentAppearance()
-//        }
         
         if onboarding == .third, let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
             requestReview(in: scene)
@@ -65,7 +59,6 @@ class OnboardingViewController: UIViewController {
     }
 
     @objc private func continueButtonTapped(_ sender: UIButton) {
-        // Простая анимация кнопки без задержки
         animateButton(sender) {
             if let next = self.onboarding.next {
                 self.coordinator?.openOnboarding(next)
@@ -74,9 +67,4 @@ class OnboardingViewController: UIViewController {
             }
         }
     }
-
-//    private func animateContentAppearance() {
-//        onboardingView.animateAppearance()
-//    }
 }
-

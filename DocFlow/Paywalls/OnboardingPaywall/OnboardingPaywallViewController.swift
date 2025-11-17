@@ -5,16 +5,13 @@ class OnboardingPaywallViewController: UIViewController {
     
     private let appHudService: AppHudService = .shared
     private let firebaseService: FirebaseService = .shared
+    private let rootView = OnboardingPaywallView()
     private var weekProduct: Product?
     private var isLoading = false
     private var paywallType: OnboardingPaywallType = .white
     
-    var rootView: OnboardingPaywallView {
-        return view as! OnboardingPaywallView
-    }
-    
     override func loadView() {
-        view = OnboardingPaywallView()
+        view = rootView
         rootView.delegate = self
     }
     
@@ -143,11 +140,13 @@ extension OnboardingPaywallViewController: OnboardingPaywallViewDelegate {
 
 extension OnboardingPaywallViewController: TermsTextViewDelegate {
     func didTapTermsOfService() {
-        presentInAppBrowser(with: Constants.termsOfCoditionURL)
+        guard let url = Constants.termsOfServiceURL else { return }
+        presentInAppBrowser(with: url)
     }
     
     func didTapPrivacyPolicy() {
-        presentInAppBrowser(with: Constants.privacyPolicyURL)
+        guard let url = Constants.privacyPolicyURL else { return }
+        presentInAppBrowser(with: url)
     }
 }
 

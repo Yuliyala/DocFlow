@@ -32,10 +32,6 @@ final class LocalStorage {
     
     // MARK: - 24-Hour Timer
     
-    func setTimer24HourStartDate(_ date: Date) {
-        userDefaults.set(date, forKey: Keys.timer24hStartDate)
-    }
-    
     var timer24HourStartDate: Date? {
         get {
             userDefaults.object(forKey: Keys.timer24hStartDate) as? Date
@@ -53,4 +49,3 @@ final class LocalStorage {
         userDefaults.removeObject(forKey: Keys.timer24hStartDate)
     }
 }
-

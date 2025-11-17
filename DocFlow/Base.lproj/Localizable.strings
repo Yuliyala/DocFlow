@@ -166,6 +166,20 @@
 /* Mail */
 "mail.title" = "PDF Editor Support";
 
+/* Settings */
+"settings.restore" = "Restore Purchases";
+"settings.share" = "Share App";
+"settings.privacy" = "Privacy Policy";
+"settings.terms" = "Terms of Use";
+"settings.contact" = "Contact Us";
+
+/* Settings Banner */
+"settings.banner.title" = "Get Full Access Today";
+"settings.banner.edit" = "Edit PDF Files";
+"settings.banner.convert" = "Converter All File Formats";
+"settings.banner.scan" = "Scanning & Printing";
+"settings.banner.button" = "Upgrade to Premium";
+
 /* Attention */
 "attention.title" = "Attention";
 "attention.message" = "Please note that this app requires certain permissions to function properly.";
@@ -173,7 +187,7 @@
 /* Tabs */
 "tab.health" = "Home";
 "tab.articles" = "Tools";
-"tab.settings" = "Documents";
+"tab.settings" = "Settings";
 "tab.profile" = "Profile";
 
 /* Paywall Trial Button */

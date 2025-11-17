@@ -190,10 +190,10 @@ class AppHudService {
         let apphudSubscriptions = await Apphud.subscriptions()
         let apphudNonSubscriptions = await Apphud.nonRenewingPurchases()
         
-        let hasActiveSubsciption: Bool = apphudSubscriptions?.first(where: { $0.isActive() }) != nil
+        let hasActiveSubscription: Bool = apphudSubscriptions?.first(where: { $0.isActive() }) != nil
         let hasActiveNonSubscription: Bool = apphudNonSubscriptions?.first(where: { $0.isActive() }) != nil
         
-        return Apphud.hasActiveSubscription() || Apphud.hasPremiumAccess() || hasActiveSubsciption || hasActiveNonSubscription
+        return Apphud.hasActiveSubscription() || Apphud.hasPremiumAccess() || hasActiveSubscription || hasActiveNonSubscription
     }
 }
 
@@ -227,5 +227,3 @@ enum RestoreError: Error {
         }
     }
 }
-
-

@@ -8,13 +8,13 @@ enum Constants {
     static let firebaseFlagKey = "isGreyFlow"
     
     // App Store
-    static let appleID = "987654321"
+    static let appId = "987654321"
     
     // Support URLs
-    static let privacyPolicyURL = URL(string: "https://docs.google.com/document/d/1eh7hRlFFguud9zdaV6tRiflMjz-jlA5Fhq4503eaxvQ/edit?usp=sharing")!
-    static let termsOfCoditionURL = URL(string: "https://docs.google.com/document/d/1XViqMC1TwS0iuDI09fkp6s-8wMX6WHanAYkPkSGU5oU/edit?usp=sharing")!
-    static let supportURL = URL(string: "https://docs.google.com/document/d/1cD1pzbCDFhmkyYysqn9_beIs2lVB0g3MZmBxsZ-nheY/edit?usp=sharing")!
-    static let email = "support@pdfeditor.com"
+    static let privacyPolicyURL = URL(string: "https://docs.google.com/document/d/1eh7hRlFFguud9zdaV6tRiflMjz-jlA5Fhq4503eaxvQ/edit?usp=sharing")
+    static let termsOfServiceURL = URL(string: "https://docs.google.com/document/d/1XViqMC1TwS0iuDI09fkp6s-8wMX6WHanAYkPkSGU5oU/edit?usp=sharing")
+    static let supportURL = URL(string: "https://docs.google.com/document/d/1cD1pzbCDFhmkyYysqn9_beIs2lVB0g3MZmBxsZ-nheY/edit?usp=sharing")
+    static let supportEmail = "support@pdfeditor.com"
 }
 
 enum AppHudConstants {
@@ -37,4 +37,3 @@ enum AppHudConstants {
         return [startPlacement, allPlacement, limitedPlacement]
     }
 }
-

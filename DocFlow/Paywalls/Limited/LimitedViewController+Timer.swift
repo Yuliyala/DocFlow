@@ -25,7 +25,7 @@ extension LimitedViewController {
     
     func startNewTimer() {
         let now = Date()
-        LocalStorage.shared.setTimer24HourStartDate(now)
+        LocalStorage.shared.timer24HourStartDate = now
         startTimerUpdates()
     }
     
@@ -73,5 +73,3 @@ extension LimitedViewController {
         return String(format: "%02dh:%02dm:%02ds", hours, minutes, seconds)
     }
 }
-
-

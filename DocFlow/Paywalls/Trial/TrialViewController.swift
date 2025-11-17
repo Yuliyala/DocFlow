@@ -4,22 +4,17 @@ import StoreKit
 class TrialViewController: UIViewController {
 
     private let appHudService: AppHudService = .shared
+    private let rootView = TrialView()
     var weekProduct: Product?
-    var monthProduct: Product?
-    var isLoading = false
+    private var monthProduct: Product?
+    private var isLoading = false
     private var hasTrial = false
+    private var currentProductIndex: Int = 0
     
-    // 🔧 ВРЕМЕННО для тестирования дизайна - удалить потом!
-    var forceTrialMode: Bool? = nil
-    
-    var currentProductIndex: Int = 0
-    
-    var rootView: TrialView {
-        return view as! TrialView
-    }
+    var forceTrialMode: Bool?
 
     override func loadView() {
-        view = TrialView()
+        view = rootView
         rootView.delegate = self
         rootView.paywallSelectorView.delegate = self
     }
@@ -158,12 +153,12 @@ extension TrialViewController: PaywallSelectorViewDelegate {
 
 extension TrialViewController: TermsTextViewDelegate {
     func didTapTermsOfService() {
-        presentInAppBrowser(with: Constants.termsOfCoditionURL)
+        guard let url = Constants.termsOfServiceURL else { return }
+        presentInAppBrowser(with: url)
     }
     
     func didTapPrivacyPolicy() {
-        presentInAppBrowser(with: Constants.privacyPolicyURL)
+        guard let url = Constants.privacyPolicyURL else { return }
+        presentInAppBrowser(with: url)
     }
 }
-
-

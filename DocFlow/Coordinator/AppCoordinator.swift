@@ -28,4 +28,3 @@ class AppCoordinator: UINavigationController {
         self.viewControllers = [TabBarController()]
     }
 }
-

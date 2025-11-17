@@ -4,22 +4,18 @@ import StoreKit
 class LimitedViewController: UIViewController {
     
     var closeCallback: (() -> Void)?
-
     var timer: Timer?
-    private let appHudService: AppHudService = .shared
-    var product: Product?
-    var isLoading = false
     
-    // 🔧 ВРЕМЕННО для тестирования дизайна - удалить потом!
-    var forceGreyFlowMode: Bool? = nil
-    var forceTrialMode: Bool? = nil
-
-    var rootView: LimitedView {
-        return view as! LimitedView
-    }
+    private let appHudService: AppHudService = .shared
+    let rootView = LimitedView()
+    private var product: Product?
+    private var isLoading = false
+    
+    var forceGreyFlowMode: Bool?
+    var forceTrialMode: Bool?
 
     override func loadView() {
-        view = LimitedView()
+        view = rootView
     }
 
     override func viewDidLoad() {
@@ -121,12 +117,12 @@ class LimitedViewController: UIViewController {
 
 extension LimitedViewController: TermsTextViewDelegate {
     func didTapTermsOfService() {
-        presentInAppBrowser(with: Constants.termsOfCoditionURL)
+        guard let url = Constants.termsOfServiceURL else { return }
+        presentInAppBrowser(with: url)
     }
     
     func didTapPrivacyPolicy() {
-        presentInAppBrowser(with: Constants.privacyPolicyURL)
+        guard let url = Constants.privacyPolicyURL else { return }
+        presentInAppBrowser(with: url)
     }
 }
-
-

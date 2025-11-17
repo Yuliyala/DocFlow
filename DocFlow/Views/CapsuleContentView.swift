@@ -49,6 +49,12 @@ class CapsuleContentView: UIView {
             setNeedsLayout()
         }
     }
+    
+    var isShadowEnabled: Bool = true {
+        didSet {
+            updateShadow()
+        }
+    }
 
     init() {
         super.init(frame: .zero)
@@ -80,6 +86,10 @@ class CapsuleContentView: UIView {
         shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 2)
         shadowContainerView.layer.shadowRadius = 4
         shadowContainerView.layer.masksToBounds = false
+    }
+    
+    private func updateShadow() {
+        shadowContainerView.layer.shadowOpacity = isShadowEnabled ? 0.1 : 0
     }
 
     private func setupConstraints() {

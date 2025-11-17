@@ -10,14 +10,11 @@ class PaywallViewController: UIViewController {
     }
     
     private func presentAppropriatePaywall() {
-        // Проверяем какой paywall показывать
-        if let limitedPlacement = appHudService.limitedPlacement,
-           let limitedProduct = appHudService.limitedProduct,
+        if appHudService.limitedPlacement != nil,
+           appHudService.limitedProduct != nil,
            appHudService.hasLimitedTrial || LocalStorage.shared.timer24HourStartDate != nil {
-            // Показываем Limited Paywall
             presentLimitedPaywall()
         } else {
-            // Показываем Trial Paywall
             presentTrialPaywall()
         }
     }
@@ -37,4 +34,3 @@ class PaywallViewController: UIViewController {
         present(limitedVC, animated: true)
     }
 }
-
