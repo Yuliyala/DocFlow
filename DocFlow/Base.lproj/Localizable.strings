@@ -24,6 +24,7 @@
 
 /* Paywall Selector */
 "paywall.selector.trial" = "%@ of Trial";
+"paywall.selector.trial_badge" = "%@ of Trial";
 "paywall.selector.best_price" = "Best Price";
 "paywall.selector.popular" = "Popular";
 "paywall.selector.week_title" = "Week";

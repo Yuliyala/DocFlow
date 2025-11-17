@@ -46,13 +46,23 @@ class TrialViewController: UIViewController {
         
         let weekPriceText = hasTrial ? "\(thenText) \(weekPrice)" : weekPrice
         let weekPricePerWeek = "(\(weekPrice)/\(weekText))"
+        let weekDescription = "\(weekPriceText)\n\(weekPricePerWeek)"
+        
+        let weekAttributedDescription = NSMutableAttributedString(string: weekDescription)
+        if let range = weekDescription.range(of: weekPricePerWeek) {
+            let nsRange = NSRange(range, in: weekDescription)
+            weekAttributedDescription.addAttribute(.foregroundColor, value: UIColor.textSecondary, range: nsRange)
+        }
+        
+        let weekInfoText: String? = {
+            guard hasTrial else { return nil }
+            return String(format: NSLocalizedString("paywall.selector.trial_badge", comment: ""), trialDuration)
+        }()
         
         rootView.paywallSelectorView.weeklySelector.configure(
-            infoText: nil,
+            infoText: weekInfoText,
             title: NSLocalizedString("paywall.selector.week_title", comment: "Week"),
-            price: weekPriceText,
-            weeklyPrice: weekPricePerWeek,
-            backgroundImage: "weeklyPrice1"
+            description: weekAttributedDescription
         )
         
         let monthPriceDecimal = monthProduct?.price ?? 19.99
@@ -67,13 +77,18 @@ class TrialViewController: UIViewController {
             weeklyPriceString = numberFormatter.string(from: weeklyPriceDecimal as NSDecimalNumber) ?? "$4.99"
         }
         let monthPricePerWeek = "(\(weeklyPriceString)/\(weekText))"
+        let monthDescription = "\(monthPrice)\n\(monthPricePerWeek)"
+        
+        let monthAttributedDescription = NSMutableAttributedString(string: monthDescription)
+        if let range = monthDescription.range(of: monthPricePerWeek) {
+            let nsRange = NSRange(range, in: monthDescription)
+            monthAttributedDescription.addAttribute(.foregroundColor, value: UIColor.textSecondary, range: nsRange)
+        }
         
         rootView.paywallSelectorView.monthlySelector.configure(
-            infoText: nil,
+            infoText: NSLocalizedString("paywall.selector.best_price", comment: "Best Price"),
             title: NSLocalizedString("paywall.selector.month_title", comment: "Month"),
-            price: monthPrice,
-            weeklyPrice: monthPricePerWeek,
-            backgroundImage: "monthlyPrice1"
+            description: monthAttributedDescription
         )
         
         configureButton()

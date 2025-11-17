@@ -15,28 +15,22 @@ class PaywallSelectorView: UIView {
         }
     }
 
-    private let contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.spacing = 0
+        stackView.spacing = 8
         return stackView
     }()
 
     let weeklySelector: PaywallSelectorSection = {
-        let view = PaywallSelectorSection()
+        let view = PaywallSelectorSection(isMainInfoStyle: true)
         return view
     }()
 
     let monthlySelector: PaywallSelectorSection = {
-        let view = PaywallSelectorSection()
+        let view = PaywallSelectorSection(isMainInfoStyle: false)
         return view
     }()
 
@@ -52,18 +46,10 @@ class PaywallSelectorView: UIView {
         setupTapGestures()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        contentView.layer.cornerRadius = 24
-        contentView.clipsToBounds = true
-    }
-
     private func setupView() {
         backgroundColor = .clear
         
-        addSubview(contentView)
-        contentView.addSubview(stackView)
+        addSubview(stackView)
 
         [weeklySelector, monthlySelector].forEach { stackView.addArrangedSubview($0) }
 
@@ -104,186 +90,154 @@ class PaywallSelectorView: UIView {
         selectedIndex = index
     }
     
-    func configureWeeklySection(infoText: String?, title: String, description: NSAttributedString, backgroundImage: String) {
-        weeklySelector.configure(infoText: infoText, title: title, description: description, backgroundImage: backgroundImage)
+    func configureWeeklySection(infoText: String?, title: String, description: NSAttributedString) {
+        weeklySelector.configure(infoText: infoText, title: title, description: description)
     }
     
-    func configureWeeklySection(infoText: String?, title: String, description: String, backgroundImage: String) {
-        weeklySelector.configure(infoText: infoText, title: title, description: description, backgroundImage: backgroundImage)
+    func configureWeeklySection(infoText: String?, title: String, description: String) {
+        weeklySelector.configure(infoText: infoText, title: title, description: description)
     }
     
-    func configureMonthlySection(infoText: String?, title: String, description: NSAttributedString, backgroundImage: String) {
-        monthlySelector.configure(infoText: infoText, title: title, description: description, backgroundImage: backgroundImage)
+    func configureMonthlySection(infoText: String?, title: String, description: NSAttributedString) {
+        monthlySelector.configure(infoText: infoText, title: title, description: description)
     }
     
-    func configureMonthlySection(infoText: String?, title: String, description: String, backgroundImage: String) {
-        monthlySelector.configure(infoText: infoText, title: title, description: description, backgroundImage: backgroundImage)
+    func configureMonthlySection(infoText: String?, title: String, description: String) {
+        monthlySelector.configure(infoText: infoText, title: title, description: description)
     }
 
     private func setupConstraints() {
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
         stackView.snp.makeConstraints {
-            $0.edges.equalTo(contentView)
+            $0.edges.equalToSuperview()
         }
     }
 }
 
-class PaywallSelectorSection: UIView {
+class PaywallSelectorSection: RoundedShadowView {
     
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 24
-        return imageView
-    }()
-
-    private let contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.spacing = 4
-        return stackView
-    }()
-
+    let isMainInfoStyle: Bool
+    
     private let radioButton: RadioButton = {
         let radioButton = RadioButton()
         radioButton.isUserInteractionEnabled = false
         return radioButton
     }()
 
-    private lazy var infoView: CapsuledLabel = {
-        let view = CapsuledLabel()
-        view.textColor = .white
-        view.backgroundColor = .accent
-        view.font = .zalandoSans(.medium, size: isSmallScreen ? 10 : 12)
-        view.insets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    private lazy var infoBackground: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 24
+        view.backgroundColor = isMainInfoStyle ? .accent : .accentSecondary
         return view
+    }()
+
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.font = .zalandoSans(.regular, size: isSmallScreen ? 11 : 11)
+        label.textColor = isMainInfoStyle ? .white : .accent
+        return label
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.semiBold, size: isSmallScreen ? 24 : 32)
+        label.font = .zalandoSans(.semiBold, size: isSmallScreen ? 14 : 18)
         label.textColor = .textPrimary
         label.textAlignment = .center
-        return label
-    }()
-    
-    private let priceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .zalandoSans(.regular, size: 16)
-        label.textColor = .textPrimary
-        label.textAlignment = .center
-        label.numberOfLines = 0
         return label
     }()
 
-    private let descriptionLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.regular, size: 14)
+        label.font = .zalandoSans(.regular, size: isSmallScreen ? 14 : 16)
         label.textColor = .textSecondary
         label.textAlignment = .center
         return label
     }()
 
-    init() {
+    init(isMainInfoStyle: Bool = false) {
+        self.isMainInfoStyle = isMainInfoStyle
         super.init(frame: .zero)
         setupView()
     }
 
     required init?(coder: NSCoder) {
+        self.isMainInfoStyle = false
         super.init(coder: coder)
         setupView()
     }
 
     private func setupView() {
-        backgroundColor = .clear
-        layer.cornerRadius = 24
-        clipsToBounds = true
+        cornerRadius = 24
+        contentView.backgroundColor = .white
+        contentView.clipsToBounds = true
         
-        addSubview(backgroundImageView)
-        addSubview(contentStackView)
-        addSubview(radioButton)
-        addSubview(infoView)
+        [titleStackView, radioButton, infoBackground, infoLabel].forEach { contentView.addSubview($0) }
+        [titleLabel, descriptionLabel].forEach { titleStackView.addArrangedSubview($0) }
         
-        [titleLabel, priceLabel, descriptionLabel].forEach { contentStackView.addArrangedSubview($0) }
-
         self.snp.makeConstraints {
-            $0.height.equalTo(129)
-        }
-        
-        backgroundImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        contentStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.leading.greaterThanOrEqualToSuperview().offset(8)
-            $0.trailing.lessThanOrEqualToSuperview().offset(-8)
+            $0.height.equalTo(isSmallScreen ? 70 : 108)
         }
         
         radioButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-24)
-            $0.width.height.equalTo(24)
+            $0.width.height.equalTo(isSmallScreen ? 14 : 24)
+            $0.top.equalToSuperview().offset(isSmallScreen ? 8 : 12)
+            $0.trailing.equalToSuperview().offset(isSmallScreen ? -8 : -12)
         }
         
-        infoView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(8)
-            $0.leading.equalToSuperview().offset(8)
-            $0.trailing.lessThanOrEqualTo(radioButton.snp.leading).offset(-4)
+        titleStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+        }
+        
+        infoLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(isSmallScreen ? 2 : 5)
+            $0.leading.equalToSuperview().offset(12)
+        }
+        
+        infoBackground.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(isSmallScreen ? -16 : -24)
+            $0.height.equalTo(isSmallScreen ? 32 : 48)
+            $0.width.equalTo(200)
+            $0.trailing.equalTo(infoLabel.snp.trailing).offset(12)
         }
     }
     
-    func setBackgroundImage(_ imageName: String) {
-        backgroundImageView.image = UIImage(named: imageName)
-    }
-
     func setSelected(_ isSelected: Bool) {
         radioButton.setChecked(isSelected, animated: true)
+        contentView.layer.borderColor = isSelected ? UIColor.accent.cgColor : UIColor.clear.cgColor
+        contentView.layer.borderWidth = isSelected ? 1 : 0
     }
     
-    func configure(infoText: String?, title: String, price: String, weeklyPrice: String, backgroundImage: String) {
+    func configure(infoText: String?, title: String, description: NSAttributedString) {
         if let infoText = infoText, !infoText.isEmpty {
-            infoView.text = infoText
-            infoView.isHidden = false
+            infoLabel.text = infoText
+            infoLabel.isHidden = false
+            infoBackground.isHidden = false
         } else {
-            infoView.isHidden = true
+            infoLabel.isHidden = true
+            infoBackground.isHidden = true
         }
         
         titleLabel.text = title
-        priceLabel.text = price
-        descriptionLabel.text = weeklyPrice
-        backgroundImageView.image = UIImage(named: backgroundImage)
+        descriptionLabel.attributedText = description
     }
     
-    func configure(infoText: String?, title: String, description: NSAttributedString, backgroundImage: String) {
-        if let infoText = infoText, !infoText.isEmpty {
-            infoView.text = infoText
-            infoView.isHidden = false
-        } else {
-            infoView.isHidden = true
-        }
-        
-        titleLabel.text = title
-        priceLabel.attributedText = description
-        descriptionLabel.text = ""
-        backgroundImageView.image = UIImage(named: backgroundImage)
-    }
-    
-    func configure(infoText: String?, title: String, description: String, backgroundImage: String) {
+    func configure(infoText: String?, title: String, description: String) {
         let attributedDescription = NSAttributedString(
             string: description,
             attributes: [
-                .font: UIFont.zalandoSans(.regular, size: 16),
-                .foregroundColor: UIColor.textPrimary
+                .font: UIFont.zalandoSans(.regular, size: isSmallScreen ? 14 : 16),
+                .foregroundColor: UIColor.textSecondary
             ]
         )
-        configure(infoText: infoText, title: title, description: attributedDescription, backgroundImage: backgroundImage)
+        configure(infoText: infoText, title: title, description: attributedDescription)
     }
 }
 

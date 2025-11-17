@@ -294,7 +294,7 @@ class TrialView: UIView {
         }
         
         paywallSelectorView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(16)
         }
         
         securedView.snp.makeConstraints {
