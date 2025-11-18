@@ -5,17 +5,20 @@ class TabBarController: UITabBarController {
     
     private let customTabBar = CustomTabBarView()
     
-    private let addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .accent
         
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let iconSize: CGFloat = isPad ? 32 : 24
+        let config = UIImage.SymbolConfiguration(pointSize: iconSize, weight: .medium)
         let plusImage = UIImage(systemName: "plus", withConfiguration: config)
         button.setImage(plusImage, for: .normal)
         button.tintColor = .white
         button.imageView?.contentMode = .scaleAspectFit
         
-        button.layer.cornerRadius = 31
+        let cornerRadius: CGFloat = isPad ? 40 : 31
+        button.layer.cornerRadius = cornerRadius
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.2
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -54,16 +57,23 @@ class TabBarController: UITabBarController {
         
         customTabBar.delegate = self
         
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let tabBarHeight: CGFloat = isPad ? 80 : 62
+        let tabBarWidth: CGFloat = isPad ? 250 : 194
+        let buttonSize: CGFloat = isPad ? 80 : 62
+        let horizontalSpacing: CGFloat = isPad ? 24 : 16
+        let bottomSpacing: CGFloat = isPad ? 24 : 8
+        
         customTabBar.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.height.equalTo(62)
-            $0.width.equalTo(194)
+            $0.left.equalToSuperview().offset(horizontalSpacing)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-bottomSpacing)
+            $0.height.equalTo(tabBarHeight)
+            $0.width.equalTo(tabBarWidth)
         }
         
         addButton.snp.makeConstraints {
-            $0.width.height.equalTo(62)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.width.height.equalTo(buttonSize)
+            $0.trailing.equalToSuperview().offset(-horizontalSpacing)
             $0.centerY.equalTo(customTabBar)
         }
         
@@ -71,7 +81,7 @@ class TabBarController: UITabBarController {
     }
     
     @objc private func addButtonTapped() {
-        // TODO: Implement add document functionality
+        
     }
 }
 

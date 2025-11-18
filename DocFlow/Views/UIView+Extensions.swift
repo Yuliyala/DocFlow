@@ -22,5 +22,8 @@ extension UIView {
         }
         return false
     }
+    
+    var isPad: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
 }
-

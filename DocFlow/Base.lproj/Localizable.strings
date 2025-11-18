@@ -185,12 +185,34 @@
 "attention.message" = "Please note that this app requires certain permissions to function properly.";
 
 /* Tabs */
-"tab.health" = "Home";
+"tab.home" = "Home";
+"tab.editor" = "PDF Editor";
 "tab.articles" = "Tools";
 "tab.settings" = "Settings";
 "tab.profile" = "Profile";
 
+/* Main Screen */
+"main.popular_tools" = "Popular Tools";
+"main.my_documents" = "My Documents";
+"main.all_documents" = "All Documents";
+"main.favorites" = "Favorites";
+"main.no_documents" = "No Documents";
+"main.tap_to_add" = "Tap \"+\" to add a document.";
+"main.coming_soon" = "Coming soon";
+
+/* Popular Tools */
+"tool.new_pdf" = "New PDF";
+"tool.scan" = "Scan";
+"tool.image_to_pdf" = "Image to PDF";
+"tool.file_to_pdf" = "File to PDF";
+"tool.merge_pdf" = "Merge PDF";
+"tool.split_pdf" = "Split PDF";
+"tool.sign" = "Sign";
+"tool.watermark" = "Watermark";
+
+/* Search */
+"search.placeholder" = "Search";
+
 /* Paywall Trial Button */
 "paywall.trial.button.title" = "Start %@ Trial, Then %@";
 "paywall.subcribe.button.title" = "Subscribe for %@";
-

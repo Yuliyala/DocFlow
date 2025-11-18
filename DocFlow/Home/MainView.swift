@@ -1,0 +1,353 @@
+import UIKit
+import SnapKit
+
+protocol MainViewDelegate: AnyObject {
+    func mainViewDidTapTool(_ tool: PopularTool)
+    func mainViewDidTapAllDocuments()
+    func mainViewDidTapFavorites()
+    func mainViewDidChangeSearchText(_ text: String)
+}
+
+class MainView: UIView {
+    weak var delegate: MainViewDelegate?
+    
+    private var selectedTab: DocumentTab = .allDocuments
+    
+    enum DocumentTab {
+        case allDocuments
+        case favorites
+    }
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("tab.editor", comment: "PDF Editor")
+        label.font = .zalandoSans(.semiBold, size: 32)
+        label.textColor = .textPrimary
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = NSLocalizedString("search.placeholder", comment: "Search")
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = .clear
+        return searchBar
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+    
+    private let contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 24
+        stackView.alignment = .fill
+        return stackView
+    }()
+    
+    private let popularToolsLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("main.popular_tools", comment: "Popular Tools")
+        label.font = .zalandoSans(.medium, size: 18)
+        label.textColor = .textPrimary
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var toolsGridView: UIView = {
+        let view = UIView()
+        setupToolsGrid(in: view)
+        return view
+    }()
+    
+    private let myDocumentsLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("main.my_documents", comment: "My Documents")
+        label.font = .zalandoSans(.medium, size: 18)
+        label.textColor = .textPrimary
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var segmentedControl: UISegmentedControl = {
+        let items = [
+            NSLocalizedString("main.all_documents", comment: "All Documents"),
+            NSLocalizedString("main.favorites", comment: "Favorites")
+        ]
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.backgroundColor = .backgroundSecondary
+        segmentedControl.selectedSegmentTintColor = .white
+        
+        segmentedControl.setTitleTextAttributes([
+            .foregroundColor: UIColor.textSecondary,
+            .font: UIFont.zalandoSans(.medium, size: 16)
+        ], for: .normal)
+        
+        segmentedControl.setTitleTextAttributes([
+            .foregroundColor: UIColor.textPrimary,
+            .font: UIFont.zalandoSans(.medium, size: 16)
+        ], for: .selected)
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        return segmentedControl
+    }()
+    
+    private let emptyStateView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let emptyStateImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .files
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .accent
+        return imageView
+    }()
+    
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("main.no_documents", comment: "No Documents")
+        label.font = .zalandoSans(.semiBold, size: 18)
+        label.textColor = .textPrimary
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let emptyStateDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("main.tap_to_add", comment: "Tap \"+\" to add a document.")
+        label.font = .zalandoSans(.regular, size: 14)
+        label.textColor = .textSecondary
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = .background
+        
+        addSubview(titleLabel)
+        addSubview(searchBar)
+        addSubview(scrollView)
+        scrollView.addSubview(contentStackView)
+        
+        [
+            popularToolsLabel,
+            toolsGridView,
+            myDocumentsLabel,
+            segmentedControl,
+            emptyStateView
+        ].forEach { contentStackView.addArrangedSubview($0) }
+        
+        contentStackView.setCustomSpacing(16, after: popularToolsLabel)
+        contentStackView.setCustomSpacing(4, after: toolsGridView)
+        contentStackView.setCustomSpacing(12, after: myDocumentsLabel)
+        
+        [emptyStateImageView, emptyStateLabel, emptyStateDescriptionLabel].forEach { emptyStateView.addSubview($0) }
+        
+        searchBar.delegate = self
+        
+        setupConstraints()
+        setupSearchBarAppearance()
+    }
+    
+    private func setupSearchBarAppearance() {
+        if let textField = searchBar.searchTextField as? UITextField {
+            textField.backgroundColor = .backgroundSecondary
+            textField.layer.cornerRadius = 12
+            textField.layer.masksToBounds = true
+        }
+    }
+    
+    private func setupConstraints() {
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(8)
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        searchBar.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.left.right.equalToSuperview().inset(16)
+            $0.height.equalTo(48)
+        }
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom).offset(20)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
+        contentStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+        
+        popularToolsLabel.snp.makeConstraints {
+            $0.height.equalTo(24)
+            $0.left.equalToSuperview().inset(16)
+        }
+        
+        toolsGridView.snp.makeConstraints {
+            $0.left.right.equalToSuperview().inset(28)
+            $0.height.equalTo(200)
+        }
+        
+        myDocumentsLabel.snp.makeConstraints {
+            $0.height.equalTo(24)
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        segmentedControl.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        emptyStateView.snp.makeConstraints {
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(300)
+        }
+        
+        emptyStateImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(8)
+            $0.width.equalTo(100)
+            $0.height.equalTo(90)
+        }
+        
+        emptyStateLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyStateImageView.snp.bottom).offset(16)
+            $0.left.right.equalToSuperview().inset(32)
+        }
+        
+        emptyStateDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyStateLabel.snp.bottom).offset(4)
+            $0.left.right.equalToSuperview().inset(32)
+        }
+    }
+    
+    private func setupToolsGrid(in container: UIView) {
+        let tools = PopularTool.allCases
+        let columns = 4
+        _ = 2
+        let spacing: CGFloat = 12
+        let horizontalInset: CGFloat = 28
+        
+        for (index, tool) in tools.enumerated() {
+            let row = index / columns
+            let column = index % columns
+            
+            let toolView = createToolView(for: tool)
+            container.addSubview(toolView)
+            
+            let totalHorizontalInsets = horizontalInset * 2
+            let totalSpacing = CGFloat(columns - 1) * spacing
+            let availableWidth = UIScreen.main.bounds.width - totalHorizontalInsets - totalSpacing
+            let itemWidth = availableWidth / CGFloat(columns)
+            
+            toolView.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(CGFloat(row) * (84 + spacing))
+                $0.left.equalToSuperview().offset(CGFloat(column) * (itemWidth + spacing))
+                $0.width.equalTo(itemWidth)
+                $0.height.equalTo(84)
+            }
+        }
+    }
+    
+    private func createToolView(for tool: PopularTool) -> UIView {
+        let container = UIView()
+        container.tag = PopularTool.allCases.firstIndex(of: tool) ?? 0
+        
+        let iconContainer = UIView()
+        iconContainer.backgroundColor = .backgroundSecondary
+        iconContainer.layer.cornerRadius = 12
+        
+        let iconView = UIImageView(image: tool.icon)
+        iconView.contentMode = .scaleAspectFit
+        iconView.tintColor = .accent
+        
+        let label = UILabel()
+        label.text = tool.title
+        label.font = .zalandoSans(.regular, size: 12)
+        label.textColor = .textPrimary
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        
+        container.addSubview(iconContainer)
+        iconContainer.addSubview(iconView)
+        container.addSubview(label)
+        
+        iconContainer.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(56)
+        }
+        
+        iconView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(24)
+        }
+        
+        label.snp.makeConstraints {
+            $0.top.equalTo(iconContainer.snp.bottom).offset(8)
+            $0.left.right.equalToSuperview()
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toolTapped(_:)))
+        container.addGestureRecognizer(tapGesture)
+        container.isUserInteractionEnabled = true
+        
+        return container
+    }
+    
+    @objc private func toolTapped(_ gesture: UITapGestureRecognizer) {
+        guard let view = gesture.view,
+              view.tag < PopularTool.allCases.count else { return }
+        
+        let tool = PopularTool.allCases[view.tag]
+        delegate?.mainViewDidTapTool(tool)
+    }
+    
+    @objc private func segmentedControlValueChanged() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            selectedTab = .allDocuments
+            delegate?.mainViewDidTapAllDocuments()
+        case 1:
+            selectedTab = .favorites
+            delegate?.mainViewDidTapFavorites()
+        default:
+            break
+        }
+    }
+    
+    func showEmptyState(_ show: Bool) {
+        emptyStateView.isHidden = !show
+    }
+}
+
+extension MainView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        delegate?.mainViewDidChangeSearchText(searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+

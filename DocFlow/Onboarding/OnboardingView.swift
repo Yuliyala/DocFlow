@@ -33,31 +33,37 @@ class OnboardingView: UIView {
         return pageControl
     }()
 
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.semiBold, size: 32)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 42 : 32
+        label.font = .zalandoSans(.semiBold, size: fontSize)
         label.textColor = .textPrimary
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
 
-    private let descriptionLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.regular, size: 16)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 20 : 16
+        label.font = .zalandoSans(.regular, size: fontSize)
         label.textColor = .textPrimary
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
 
-    let continueButton: UIButton = {
+    lazy var continueButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString("onboarding.button.continue", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .zalandoSans(.medium, size: 16)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 20 : 16
+        button.titleLabel?.font = .zalandoSans(.medium, size: fontSize)
         button.backgroundColor = .accent
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = isPad ? 20 : 16
         return button
     }()
 
@@ -85,17 +91,21 @@ class OnboardingView: UIView {
     }
 
     private func setupConstraints() {
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        
         mainImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.left.right.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.58)
         }
         
+        let pageControlTopOffset: CGFloat = isPad ? 70 : 50
+        let pageControlHeight: CGFloat = isPad ? 32 : 24
         pageControlContainer.snp.makeConstraints {
-            $0.top.equalTo(mainImageView.snp.bottom).offset(50)
+            $0.top.equalTo(mainImageView.snp.bottom).offset(pageControlTopOffset)
             $0.centerX.equalToSuperview()
             $0.width.greaterThanOrEqualTo(96)
-            $0.height.equalTo(24)
+            $0.height.equalTo(pageControlHeight)
         }
         
         pageControl.snp.makeConstraints {
@@ -103,20 +113,26 @@ class OnboardingView: UIView {
             $0.left.right.equalToSuperview().inset(12)
         }
         
+        let titleTopOffset: CGFloat = isPad ? 42 : 32
+        let horizontalInset: CGFloat = isPad ? 48 : 32
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(pageControlContainer.snp.bottom).offset(32)
-            $0.left.right.equalToSuperview().inset(32)
+            $0.top.equalTo(pageControlContainer.snp.bottom).offset(titleTopOffset)
+            $0.left.right.equalToSuperview().inset(horizontalInset)
         }
         
+        let descriptionTopOffset: CGFloat = isPad ? 12 : 8
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.left.right.equalToSuperview().inset(32)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(descriptionTopOffset)
+            $0.left.right.equalToSuperview().inset(horizontalInset)
         }
         
+        let buttonInset: CGFloat = isPad ? 24 : 16
+        let buttonBottomOffset: CGFloat = isPad ? -80 : -50
+        let buttonHeight: CGFloat = isPad ? 68 : 56
         continueButton.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(16)
-            $0.bottom.equalTo(safeAreaLayoutGuide).offset(-50)
-            $0.height.equalTo(56)
+            $0.left.right.equalToSuperview().inset(buttonInset)
+            $0.bottom.equalTo(safeAreaLayoutGuide).offset(buttonBottomOffset)
+            $0.height.equalTo(buttonHeight)
         }
     }
 

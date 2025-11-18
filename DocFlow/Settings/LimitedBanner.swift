@@ -22,9 +22,10 @@ class LimitedBanner: UIView {
         return view
     }()
     
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.medium, size: 24)
+        let fontSize: CGFloat = isPad ? 32 : 24
+        label.font = .zalandoSans(.medium, size: fontSize)
         label.textColor = .white
         label.numberOfLines = 1
         label.textAlignment = .left
@@ -89,16 +90,21 @@ class LimitedBanner: UIView {
             $0.edges.equalToSuperview()
         }
         
+        let buttonHeight: CGFloat = isPad ? 60 : 48
+        let buttonWidth: CGFloat = isPad ? 280 : 210
+        let imageHeight: CGFloat = isPad ? 150 : 110
+        let imageTopOffset: CGFloat = isPad ? 60 : 46
+        
         ctaButton.snp.makeConstraints {
-            $0.height.equalTo(48)
-            $0.width.equalTo(210)
+            $0.height.equalTo(buttonHeight)
+            $0.width.equalTo(buttonWidth)
             $0.left.equalToSuperview().offset(16)
         }
         
         rightImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(46)
+            $0.top.equalToSuperview().offset(imageTopOffset)
             $0.trailing.equalToSuperview().offset(-8)
-            $0.height.equalTo(110)
+            $0.height.equalTo(imageHeight)
         }
     }
     
@@ -107,18 +113,19 @@ class LimitedBanner: UIView {
         let imageView = UIImageView(image: .checkmarkBadge)
         imageView.contentMode = .scaleAspectFit
         let label = UILabel()
-        label.font = .zalandoSans(.regular, size: 14)
+        let fontSize: CGFloat = isPad ? 18 : 14
+        label.font = .zalandoSans(.regular, size: fontSize)
         label.textColor = .white
         label.numberOfLines = 1
         label.text = text
         view.axis = .horizontal
-        view.spacing = 8
+        view.spacing = isPad ? 12 : 8
         view.alignment = .center
+        let iconSize: CGFloat = isPad ? 24 : 18
         imageView.snp.makeConstraints {
-            $0.width.height.equalTo(18)
+            $0.width.height.equalTo(iconSize)
         }
         [imageView, label].forEach(view.addArrangedSubview(_:))
         return view
     }
 }
-

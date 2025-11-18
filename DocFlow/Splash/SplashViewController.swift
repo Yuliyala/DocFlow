@@ -8,19 +8,23 @@ class SplashViewController: UIViewController {
         navigationController as? AppCoordinator
     }
 
-    private let welcomeLabel: UILabel = {
+    private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("splash.welcome", comment: "")
-        label.font = .zalandoSans(.medium, size: 24)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 32 : 24
+        label.font = .zalandoSans(.medium, size: fontSize)
         label.textColor = .textPrimary
         label.textAlignment = .center
         return label
     }()
     
-    private let appNameLabel: UILabel = {
+    private lazy var appNameLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("splash.app_name", comment: "")
-        label.font = .zalandoSans(.semiBold, size: 40)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 52 : 40
+        label.font = .zalandoSans(.semiBold, size: fontSize)
         label.textColor = .accent
         label.textAlignment = .center
         return label
@@ -142,13 +146,17 @@ class SplashViewController: UIViewController {
     }
 
     private func setupConstraints() {
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        
+        let logoSize: CGFloat = isPad ? 180 : 132
         logoImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.size.equalTo(132)
+            $0.size.equalTo(logoSize)
         }
         
+        let labelSpacing: CGFloat = isPad ? -34 : -26
         appNameLabel.snp.makeConstraints {
-            $0.bottom.equalTo(logoImageView.snp.top).offset(-26)
+            $0.bottom.equalTo(logoImageView.snp.top).offset(labelSpacing)
             $0.centerX.equalToSuperview()
         }
         
@@ -157,10 +165,14 @@ class SplashViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
+        let progressInset: CGFloat = isPad ? 150 : 100
+        let progressBottomOffset: CGFloat = isPad ? -100 : -50
+        let progressHeight: CGFloat = isPad ? 10 : 8
+        
         progressView.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(100)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
-            $0.height.equalTo(8)
+            $0.left.right.equalToSuperview().inset(progressInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(progressBottomOffset)
+            $0.height.equalTo(progressHeight)
         }
     }
 }

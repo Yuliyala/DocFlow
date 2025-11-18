@@ -10,10 +10,11 @@ class CustomTabBarView: UIView {
     
     private var selectedIndex: Int = 0
     
-    private let containerView: UIView = {
+    private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#E8E8E8")
-        view.layer.cornerRadius = 31
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        view.layer.cornerRadius = isPad ? 40 : 31
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.05
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -32,7 +33,7 @@ class CustomTabBarView: UIView {
     }()
     
     private lazy var homeTab = createTab(
-        title: NSLocalizedString("tab.health", comment: ""),
+        title: NSLocalizedString("tab.home", comment: ""),
         image: .homeIcon,
         index: 0
     )
@@ -77,16 +78,18 @@ class CustomTabBarView: UIView {
         container.tag = index
         container.backgroundColor = .clear
         
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        
         let backgroundView = UIView()
         backgroundView.backgroundColor = .clear
-        backgroundView.layer.cornerRadius = 24
+        backgroundView.layer.cornerRadius = isPad ? 32 : 24
         backgroundView.clipsToBounds = true
         backgroundView.tag = 300 + index
         
         let innerStackView = UIStackView()
         innerStackView.axis = .vertical
         innerStackView.alignment = .center
-        innerStackView.spacing = 4
+        innerStackView.spacing = isPad ? 6 : 4
         innerStackView.isUserInteractionEnabled = false
         
         let imageView = UIImageView(image: image.withRenderingMode(.alwaysTemplate))
@@ -96,7 +99,8 @@ class CustomTabBarView: UIView {
         
         let label = UILabel()
         label.text = title
-        label.font = .zalandoSans(.medium, size: 12)
+        let fontSize: CGFloat = isPad ? 16 : 12
+        label.font = .zalandoSans(.medium, size: fontSize)
         label.textColor = .textSecondary
         label.textAlignment = .center
         label.tag = 200 + index
@@ -107,17 +111,20 @@ class CustomTabBarView: UIView {
         container.addSubview(backgroundView)
         backgroundView.addSubview(innerStackView)
         
+        let inset: CGFloat = isPad ? 3 : 2
         backgroundView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(2)
-            $0.height.greaterThanOrEqualTo(40)
+            $0.edges.equalToSuperview().inset(inset)
+            $0.height.greaterThanOrEqualTo(isPad ? 50 : 40)
         }
         
+        let iconSize: CGFloat = isPad ? 32 : 24
         imageView.snp.makeConstraints {
-            $0.width.height.equalTo(24)
+            $0.width.height.equalTo(iconSize)
         }
         
+        let padding: CGFloat = isPad ? 6 : 4
         innerStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(4)
+            $0.edges.equalToSuperview().inset(padding)
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tabTapped(_:)))
