@@ -74,28 +74,14 @@ class MainView: UIView {
         return label
     }()
     
-    private lazy var segmentedControl: UISegmentedControl = {
+    private lazy var segmentedControl: CustomSegmentedControl = {
         let items = [
             NSLocalizedString("main.all_documents", comment: "All Documents"),
             NSLocalizedString("main.favorites", comment: "Favorites")
         ]
-        let segmentedControl = UISegmentedControl(items: items)
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.backgroundColor = .backgroundSecondary
-        segmentedControl.selectedSegmentTintColor = .white
-        
-        segmentedControl.setTitleTextAttributes([
-            .foregroundColor: UIColor.textSecondary,
-            .font: UIFont.zalandoSans(.medium, size: 16)
-        ], for: .normal)
-        
-        segmentedControl.setTitleTextAttributes([
-            .foregroundColor: UIColor.textPrimary,
-            .font: UIFont.zalandoSans(.medium, size: 16)
-        ], for: .selected)
-        
-        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-        return segmentedControl
+        let control = CustomSegmentedControl(items: items)
+        control.delegate = self
+        return control
     }()
     
     private let emptyStateView: UIView = {
@@ -323,8 +309,14 @@ class MainView: UIView {
         delegate?.mainViewDidTapTool(tool)
     }
     
-    @objc private func segmentedControlValueChanged() {
-        switch segmentedControl.selectedSegmentIndex {
+    func showEmptyState(_ show: Bool) {
+        emptyStateView.isHidden = !show
+    }
+}
+
+extension MainView: CustomSegmentedControlDelegate {
+    func customSegmentedControl(_ control: CustomSegmentedControl, didSelectSegmentAt index: Int) {
+        switch index {
         case 0:
             selectedTab = .allDocuments
             delegate?.mainViewDidTapAllDocuments()
@@ -334,10 +326,6 @@ class MainView: UIView {
         default:
             break
         }
-    }
-    
-    func showEmptyState(_ show: Bool) {
-        emptyStateView.isHidden = !show
     }
 }
 
