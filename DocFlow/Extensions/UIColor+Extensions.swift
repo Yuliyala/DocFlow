@@ -1,65 +1,42 @@
 import UIKit
 
 extension UIColor {
-    static var accent: UIColor {
-        return UIColor(hex: "#DF4D53")
-    }
+    // MARK: - Convenience Aliases
     
     static var accentSecondary: UIColor {
-        return UIColor(hex: "#FAE7E8")
-    }
-    
-    static var background: UIColor {
-        return UIColor(hex: "#F7F7F7")
-    }
-    
-    static var backgroundSecondary: UIColor {
-        return UIColor(hex: "#FFFFFF")
+        return buttonSecondary
     }
     
     static var backgroundTertiary: UIColor {
-        return UIColor(hex: "#F0F0F0")
-    }
-    
-    static var textPrimary: UIColor {
-        return UIColor(hex: "#131212")
-    }
-    
-    static var textSecondary: UIColor {
-        return UIColor(hex: "#6F6F6F")
+        return tertiary
     }
     
     static var textTertiary: UIColor {
-        return UIColor(hex: "#FFFFFF")
+        return .white
     }
     
     static var iconPrimary: UIColor {
-        return UIColor(hex: "#131212")
+        return textPrimary
     }
     
     static var iconSecondary: UIColor {
-        return UIColor(hex: "#6F6F6F")
+        return textSecondary
     }
     
     static var iconTertiary: UIColor {
-        return UIColor(hex: "#FFFFFF")
-    }
-    
-    static var strokePrimary: UIColor {
-        return UIColor(hex: "#EFEFEF")
+        return .white
     }
     
     static var buttonPrimary: UIColor {
-        return UIColor(hex: "#DF4D53")
+        return accent
     }
     
-    static var buttonSecondary: UIColor {
-        return UIColor(hex: "#FAE7E8")
+    static var greyAccent: UIColor {
+        return strokePrimary
     }
     
-    static var buttonDisabled: UIColor {
-        return UIColor(hex: "#ECECEC")
-    }
+    // MARK: - Hex Initializer
+    
     convenience init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -82,9 +59,4 @@ extension UIColor {
             alpha: CGFloat(a) / 255
         )
     }
-    
-    static var greyAccent: UIColor {
-        return strokePrimary
-    }
 }
-

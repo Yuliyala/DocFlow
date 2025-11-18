@@ -53,7 +53,7 @@ class TextRowsView: UIView {
             
             if index < items.count - 1 {
                 let separator = UIView()
-                separator.backgroundColor = .buttonPrimary
+                separator.backgroundColor = .segmentBackground
                 separator.translatesAutoresizingMaskIntoConstraints = false
                 stackView.addArrangedSubview(separator)
                 NSLayoutConstraint.activate([

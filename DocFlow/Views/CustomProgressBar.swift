@@ -12,13 +12,13 @@ class CustomProgressBar: UIView {
         }
     }
 
-    @IBInspectable var progressColor: UIColor = .accent {
+    @IBInspectable var progressColor: UIColor = UIColor.accent {
         didSet {
             progressLayer.backgroundColor = progressColor.cgColor
         }
     }
 
-    @IBInspectable var trackColor: UIColor = .strokePrimary {
+    @IBInspectable var trackColor: UIColor = UIColor.strokePrimary {
         didSet {
             backgroundLayer.backgroundColor = trackColor.cgColor
         }

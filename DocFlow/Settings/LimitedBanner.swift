@@ -49,7 +49,7 @@ class LimitedBanner: UIView {
         let button = PrimaryButton()
         button.backgroundColor = .white
         button.setTitle(NSLocalizedString("settings.banner.button", comment: ""), for: .normal)
-        button.setTitleColor(.accent, for: .normal)
+        button.setTitleColor(UIColor.accent, for: .normal)
         button.isUserInteractionEnabled = false
         return button
     }()
@@ -67,7 +67,7 @@ class LimitedBanner: UIView {
     private func setup() {
         clipsToBounds = true
         layer.cornerRadius = 24
-        backgroundColor = .accent
+        backgroundColor = UIColor.accent
         [backgroundImageView, rightImage, stackView].forEach(addSubview(_:))
         [
             titleLabel,

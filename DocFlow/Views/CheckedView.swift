@@ -16,7 +16,7 @@ class CheckedView: UIView {
     }
 
     private func setupView() {
-        backgroundColor = .background
+        backgroundColor = UIColor.background
     }
 
     override func draw(_ rect: CGRect) {

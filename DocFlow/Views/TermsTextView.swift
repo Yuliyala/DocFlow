@@ -28,7 +28,7 @@ class TermsTextView: UITextView {
         self.textContainerInset = .zero
         
         self.linkTextAttributes = [
-            .foregroundColor: UIColor(hex: "#DF4D53"),
+            .foregroundColor: UIColor.accent,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
 
@@ -55,7 +55,7 @@ class TermsTextView: UITextView {
             let nsRange = NSRange(termsRange, in: fullText)
             let termsAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.zalandoSans(.regular, size: 12),
-                .foregroundColor: UIColor(hex: "#DF4D53"),
+                .foregroundColor: UIColor.accent,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .link: "terms_of_use"
             ]
@@ -67,7 +67,7 @@ class TermsTextView: UITextView {
             let nsRange = NSRange(privacyRange, in: fullText)
             let privacyAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.zalandoSans(.regular, size: 12),
-                .foregroundColor: UIColor(hex: "#DF4D53"),
+                .foregroundColor: UIColor.accent,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .link: "privacy_policy"
             ]

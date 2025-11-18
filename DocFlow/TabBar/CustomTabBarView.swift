@@ -12,7 +12,7 @@ class CustomTabBarView: UIView {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: "#E8E8E8")
+        view.backgroundColor = .segmentBackground
         let isPad = UIDevice.current.userInterfaceIdiom == .pad
         view.layer.cornerRadius = isPad ? 40 : 31
         view.layer.shadowColor = UIColor.black.cgColor

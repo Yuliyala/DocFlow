@@ -13,7 +13,7 @@ final class PrimaryButton: UIButton {
     }
     
     private func setupButton() {
-        backgroundColor = .accent
+        backgroundColor = UIColor.accent
         setTitleColor(.white, for: .normal)
         titleLabel?.font = .zalandoSans(.medium, size: 16)
         layer.cornerRadius = isSmallScreen ? 12 : 16

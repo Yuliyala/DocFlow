@@ -11,7 +11,7 @@ class FloatingBadge: UIView {
         return imageView
     }()
     
-    init(icon: UIImage?, backgroundColor: UIColor = .accent, size: CGFloat = 64) {
+    init(icon: UIImage?, backgroundColor: UIColor = UIColor.accent, size: CGFloat = 64) {
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = size / 2

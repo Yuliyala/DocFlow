@@ -57,7 +57,7 @@ class SettingsView: UIView {
     }
     
     private func setup() {
-        backgroundColor = .background
+        backgroundColor = UIColor.background
         addSubview(navBar)
         addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -93,7 +93,7 @@ class SettingsView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .zalandoSans(.medium, size: 16)
-        label.textColor = .textPrimary
+        label.textColor = UIColor.textPrimary
         label.text = option.title
 
         let chevron = UIImageView(image: .arrowRight)
