@@ -81,12 +81,44 @@ class TabBarController: UITabBarController {
     }
     
     @objc private func addButtonTapped() {
+        let addDocumentVC = AddDocumentViewController()
+        addDocumentVC.delegate = self
         
+        if let sheet = addDocumentVC.sheetPresentationController {
+            let customDetent = UISheetPresentationController.Detent.custom { context in
+                return context.maximumDetentValue * 0.36
+            }
+            sheet.detents = [customDetent]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 24
+        }
+        
+        present(addDocumentVC, animated: true)
     }
 }
 
 extension TabBarController: CustomTabBarViewDelegate {
     func customTabBarView(_ tabBarView: CustomTabBarView, didSelectTabAt index: Int) {
         selectedIndex = index
+    }
+}
+
+extension TabBarController: AddDocumentPresenterDelegate {
+    func addDocumentDidSelectGallery() {
+        #if DEBUG
+        print("Gallery selected")
+        #endif
+    }
+    
+    func addDocumentDidSelectFiles() {
+        #if DEBUG
+        print("Files selected")
+        #endif
+    }
+    
+    func addDocumentDidSelectScan() {
+        #if DEBUG
+        print("Scan selected")
+        #endif
     }
 }

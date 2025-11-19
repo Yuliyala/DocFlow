@@ -230,7 +230,6 @@ class MainView: UIView {
     private func setupToolsGrid(in container: UIView) {
         let tools = PopularTool.allCases
         let columns = 4
-        _ = 2
         let spacing: CGFloat = 12
         let horizontalInset: CGFloat = 28
         

@@ -216,3 +216,9 @@
 /* Paywall Trial Button */
 "paywall.trial.button.title" = "Start %@ Trial, Then %@";
 "paywall.subcribe.button.title" = "Subscribe for %@";
+
+/* Add Document */
+"add_document.title" = "Add Document";
+"add_document.gallery" = "Gallery";
+"add_document.files" = "Files";
+"add_document.scan" = "Scan";
