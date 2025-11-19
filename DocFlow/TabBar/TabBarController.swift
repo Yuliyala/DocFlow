@@ -4,6 +4,7 @@ import SnapKit
 class TabBarController: UITabBarController {
     
     private let customTabBar = CustomTabBarView()
+    private var bottomSheetTransitioningDelegate: CustomBottomSheetTransitioningDelegate?
     
     private lazy var addButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -81,17 +82,16 @@ class TabBarController: UITabBarController {
     }
     
     @objc private func addButtonTapped() {
+        guard presentedViewController == nil else { return }
+        
         let addDocumentVC = AddDocumentViewController()
         addDocumentVC.delegate = self
         
-        if let sheet = addDocumentVC.sheetPresentationController {
-            let customDetent = UISheetPresentationController.Detent.custom { context in
-                return context.maximumDetentValue * 0.36
-            }
-            sheet.detents = [customDetent]
-            sheet.prefersGrabberVisible = true
-            sheet.preferredCornerRadius = 24
-        }
+        let transitioningDelegate = CustomBottomSheetTransitioningDelegate(heightPercentage: 0.36)
+        self.bottomSheetTransitioningDelegate = transitioningDelegate
+        
+        addDocumentVC.modalPresentationStyle = .custom
+        addDocumentVC.transitioningDelegate = transitioningDelegate
         
         present(addDocumentVC, animated: true)
     }
@@ -105,20 +105,14 @@ extension TabBarController: CustomTabBarViewDelegate {
 
 extension TabBarController: AddDocumentPresenterDelegate {
     func addDocumentDidSelectGallery() {
-        #if DEBUG
-        print("Gallery selected")
-        #endif
+        
     }
     
     func addDocumentDidSelectFiles() {
-        #if DEBUG
-        print("Files selected")
-        #endif
+        
     }
     
     func addDocumentDidSelectScan() {
-        #if DEBUG
-        print("Scan selected")
-        #endif
+        
     }
 }

@@ -57,9 +57,7 @@ final class MainPresenter {
     }
     
     private func handleToolSelection(_ tool: PopularTool) {
-        #if DEBUG
-        print("Tool selected: \(tool.title)")
-        #endif
+        
     }
 }
 

@@ -186,11 +186,10 @@ class MainView: UIView {
         
         popularToolsLabel.snp.makeConstraints {
             $0.height.equalTo(24)
-            $0.left.equalToSuperview().inset(16)
+            $0.left.right.equalToSuperview().inset(16)
         }
         
         toolsGridView.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(28)
             $0.height.equalTo(200)
         }
         
