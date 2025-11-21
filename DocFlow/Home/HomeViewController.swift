@@ -37,11 +37,27 @@ extension HomeViewController: MainViewDelegate {
     func mainViewDidChangeSearchText(_ text: String) {
         presenter.didChangeSearchText(text)
     }
+    
+    func mainViewDidBeginSearch() {
+        presenter.didBeginSearch()
+    }
+    
+    func mainViewDidEndSearch() {
+        presenter.didEndSearch()
+    }
 }
 
 extension HomeViewController: MainViewProtocol {
-    func showEmptyState(_ show: Bool) {
-        mainView.showEmptyState(show)
+    func showEmptyState(_ show: Bool, type: MainView.EmptyStateType) {
+        mainView.showEmptyState(show, type: type)
+    }
+    
+    func showDocuments(_ documents: [Document]) {
+        mainView.showDocuments(documents)
+    }
+    
+    func setSearchMode(_ isSearching: Bool) {
+        mainView.setSearchMode(isSearching)
     }
     
     func showLoading() {

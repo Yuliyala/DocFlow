@@ -6,6 +6,8 @@ protocol MainViewDelegate: AnyObject {
     func mainViewDidTapAllDocuments()
     func mainViewDidTapFavorites()
     func mainViewDidChangeSearchText(_ text: String)
+    func mainViewDidBeginSearch()
+    func mainViewDidEndSearch()
 }
 
 class MainView: UIView {
@@ -18,6 +20,11 @@ class MainView: UIView {
         case favorites
     }
     
+    enum EmptyStateType {
+        case noDocuments
+        case searchNotFound
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("tab.editor", comment: "PDF Editor")
@@ -27,11 +34,10 @@ class MainView: UIView {
         return label
     }()
     
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
+    private lazy var searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
         searchBar.placeholder = NSLocalizedString("search.placeholder", comment: "Search")
-        searchBar.searchBarStyle = .minimal
-        searchBar.backgroundColor = .clear
+        searchBar.delegate = self
         return searchBar
     }()
     
@@ -84,6 +90,14 @@ class MainView: UIView {
         return control
     }()
     
+    private let documentsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.alignment = .fill
+        return stackView
+    }()
+    
     private let emptyStateView: UIView = {
         let view = UIView()
         return view
@@ -97,24 +111,26 @@ class MainView: UIView {
         return imageView
     }()
     
-    private let emptyStateLabel: UILabel = {
+    private lazy var emptyStateLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("main.no_documents", comment: "No Documents")
-        label.font = .zalandoSans(.semiBold, size: 18)
+        label.font = .zalandoSans(.semiBold, size: isPad ? 24 : 18)
         label.textColor = .textPrimary
         label.textAlignment = .center
         return label
     }()
     
-    private let emptyStateDescriptionLabel: UILabel = {
+    private lazy var emptyStateDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("main.tap_to_add", comment: "Tap \"+\" to add a document.")
-        label.font = .zalandoSans(.regular, size: 14)
+        label.font = .zalandoSans(.regular, size: isPad ? 18 : 14)
         label.textColor = .textSecondary
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
+    
+    private var emptyStateLabelTopConstraint: Constraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -139,27 +155,18 @@ class MainView: UIView {
             toolsGridView,
             myDocumentsLabel,
             segmentedControl,
+            documentsStackView,
             emptyStateView
         ].forEach { contentStackView.addArrangedSubview($0) }
         
         contentStackView.setCustomSpacing(16, after: popularToolsLabel)
         contentStackView.setCustomSpacing(4, after: toolsGridView)
         contentStackView.setCustomSpacing(12, after: myDocumentsLabel)
+        contentStackView.setCustomSpacing(16, after: segmentedControl)
         
         [emptyStateImageView, emptyStateLabel, emptyStateDescriptionLabel].forEach { emptyStateView.addSubview($0) }
         
-        searchBar.delegate = self
-        
         setupConstraints()
-        setupSearchBarAppearance()
-    }
-    
-    private func setupSearchBarAppearance() {
-        if let textField = searchBar.searchTextField as? UITextField {
-            textField.backgroundColor = .backgroundSecondary
-            textField.layer.cornerRadius = 12
-            textField.layer.masksToBounds = true
-        }
     }
     
     private func setupConstraints() {
@@ -203,26 +210,37 @@ class MainView: UIView {
             $0.left.right.equalToSuperview().inset(16)
         }
         
+        documentsStackView.snp.makeConstraints {
+            $0.left.right.equalToSuperview().inset(16)
+        }
+        
+        let emptyStateHeight: CGFloat = isPad ? 400 : 300
+        let imageWidth: CGFloat = isPad ? 130 : 100
+        let imageHeight: CGFloat = isPad ? 117 : 90
+        let labelOffset: CGFloat = isPad ? 20 : 16
+        let descriptionOffset: CGFloat = isPad ? 6 : 4
+        let horizontalInset: CGFloat = isPad ? 48 : 32
+        
         emptyStateView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.height.equalTo(300)
+            $0.height.equalTo(emptyStateHeight)
         }
         
         emptyStateImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(8)
-            $0.width.equalTo(100)
-            $0.height.equalTo(90)
+            $0.width.equalTo(imageWidth)
+            $0.height.equalTo(imageHeight)
         }
         
         emptyStateLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyStateImageView.snp.bottom).offset(16)
-            $0.left.right.equalToSuperview().inset(32)
+            emptyStateLabelTopConstraint = $0.top.equalTo(emptyStateImageView.snp.bottom).offset(labelOffset).constraint
+            $0.left.right.equalToSuperview().inset(horizontalInset)
         }
         
         emptyStateDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyStateLabel.snp.bottom).offset(4)
-            $0.left.right.equalToSuperview().inset(32)
+            $0.top.equalTo(emptyStateLabel.snp.bottom).offset(descriptionOffset)
+            $0.left.right.equalToSuperview().inset(horizontalInset)
         }
     }
     
@@ -307,13 +325,60 @@ class MainView: UIView {
         delegate?.mainViewDidTapTool(tool)
     }
     
-    func showEmptyState(_ show: Bool) {
+    func showEmptyState(_ show: Bool, type: EmptyStateType = .noDocuments) {
         emptyStateView.isHidden = !show
+        
+        guard show else { return }
+        
+        let labelOffset: CGFloat = isPad ? 20 : 16
+        let searchNotFoundOffset: CGFloat = isPad ? 100 : 80
+        
+        switch type {
+        case .noDocuments:
+            emptyStateImageView.isHidden = false
+            emptyStateImageView.image = .files
+            emptyStateLabel.text = NSLocalizedString("main.no_documents", comment: "No Documents")
+            emptyStateDescriptionLabel.text = NSLocalizedString("main.tap_to_add", comment: "Tap \"+\" to add a document.")
+            emptyStateLabelTopConstraint?.update(offset: labelOffset)
+            
+        case .searchNotFound:
+            emptyStateImageView.isHidden = true
+            emptyStateLabel.text = NSLocalizedString("search.no_results", comment: "Documents Not Found")
+            emptyStateDescriptionLabel.text = NSLocalizedString("search.no_results_description", comment: "Please check the document title or enter a different title.")
+            emptyStateLabelTopConstraint?.update(offset: searchNotFoundOffset)
+        }
+    }
+    
+    func setSearchMode(_ isSearching: Bool) {
+        titleLabel.isHidden = isSearching
+        popularToolsLabel.isHidden = isSearching
+        toolsGridView.isHidden = isSearching
+        myDocumentsLabel.isHidden = isSearching
+        segmentedControl.isHidden = isSearching
+    }
+    
+    func showDocuments(_ documents: [Document]) {
+        documentsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        documents.forEach { document in
+            let cell = DocumentCell()
+            cell.configure(with: document)
+            documentsStackView.addArrangedSubview(cell)
+        }
+        
+        documentsStackView.isHidden = documents.isEmpty
+    }
+    
+    func clearSearch() {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }
 
 extension MainView: CustomSegmentedControlDelegate {
     func customSegmentedControl(_ control: CustomSegmentedControl, didSelectSegmentAt index: Int) {
+        clearSearch()
+        
         switch index {
         case 0:
             selectedTab = .allDocuments
@@ -327,13 +392,26 @@ extension MainView: CustomSegmentedControlDelegate {
     }
 }
 
-extension MainView: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension MainView: CustomSearchBarDelegate {
+    func searchBar(_ searchBar: CustomSearchBar, textDidChange searchText: String) {
         delegate?.mainViewDidChangeSearchText(searchText)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+    func searchBarDidBeginEditing(_ searchBar: CustomSearchBar) {
+        delegate?.mainViewDidBeginSearch()
+    }
+    
+    func searchBarDidEndEditing(_ searchBar: CustomSearchBar) {
+        delegate?.mainViewDidEndSearch()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: CustomSearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: CustomSearchBar) {
+        clearSearch()
+        delegate?.mainViewDidChangeSearchText("")
     }
 }
 

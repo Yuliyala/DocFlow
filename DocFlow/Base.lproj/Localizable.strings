@@ -212,6 +212,9 @@
 
 /* Search */
 "search.placeholder" = "Search";
+"search.cancel" = "Cancel";
+"search.no_results" = "Documents Not Found";
+"search.no_results_description" = "Please check the document title or enter a different title.";
 
 /* Paywall Trial Button */
 "paywall.trial.button.title" = "Start %@ Trial, Then %@";
