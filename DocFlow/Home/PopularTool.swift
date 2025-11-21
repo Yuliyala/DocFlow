@@ -17,7 +17,7 @@ enum PopularTool: CaseIterable {
         case .scan:
             return .scan
         case .imageToPDF:
-            return .pdfIcon
+            return .pdf
         case .fileToPDF:
             return .fileToPdf
         case .mergePDF:
