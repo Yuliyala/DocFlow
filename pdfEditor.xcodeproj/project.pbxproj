@@ -7,66 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B24C8C032EC604B700832EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B24C8C022EC604B700832EA4 /* SnapKit */; };
-		B28E77272EC4D54800D0CB8A /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77262EC4D54800D0CB8A /* ApphudSDK */; };
-		B28E772F2EC4D5A200D0CB8A /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */; };
-		B28E77322EC4D67400D0CB8A /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */; };
-		B28E773A2EC4D70300D0CB8A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B28E77392EC4D70300D0CB8A /* KeychainAccess */; };
+		B2EAA9F62ED2243D00187E95 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B2EAA9F52ED2243D00187E95 /* SnapKit */; };
+		B2EAA9F92ED2245800187E95 /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = B2EAA9F82ED2245800187E95 /* ApphudSDK */; };
+		B2EAA9FC2ED2247600187E95 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B2EAA9FB2ED2247600187E95 /* KeychainAccess */; };
+		B2EAA9FF2ED2264300187E95 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = B2EAA9FE2ED2264300187E95 /* FirebaseCore */; };
+		B2EAAA012ED2264300187E95 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = B2EAAA002ED2264300187E95 /* FirebaseRemoteConfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B28E760C2EC32E7D00D0CB8A /* DocFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2779A5D2ED20294006DAD28 /* pdfEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pdfEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B28E761E2EC32E7E00D0CB8A /* Exceptions for "DocFlow" folder in "DocFlow" target */ = {
+		B2F9FD392ED20E28001E00EF /* Exceptions for "pdfEditor" folder in "pdfEditor" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = B28E760B2EC32E7D00D0CB8A /* DocFlow */;
+			target = B2779A5C2ED20294006DAD28 /* pdfEditor */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B28E760E2EC32E7D00D0CB8A /* DocFlow */ = {
+		B2779A5F2ED20294006DAD28 /* pdfEditor */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				B28E761E2EC32E7E00D0CB8A /* Exceptions for "DocFlow" folder in "DocFlow" target */,
+				B2F9FD392ED20E28001E00EF /* Exceptions for "pdfEditor" folder in "pdfEditor" target */,
 			);
-			path = DocFlow;
+			path = pdfEditor;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B28E76092EC32E7D00D0CB8A /* Frameworks */ = {
+		B2779A5A2ED20294006DAD28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B28E772F2EC4D5A200D0CB8A /* SwiftEntryKit in Frameworks */,
-				B28E77272EC4D54800D0CB8A /* ApphudSDK in Frameworks */,
-				B28E773A2EC4D70300D0CB8A /* KeychainAccess in Frameworks */,
-				B28E77322EC4D67400D0CB8A /* FirebaseRemoteConfig in Frameworks */,
-				B24C8C032EC604B700832EA4 /* SnapKit in Frameworks */,
+				B2EAA9F62ED2243D00187E95 /* SnapKit in Frameworks */,
+				B2EAA9F92ED2245800187E95 /* ApphudSDK in Frameworks */,
+				B2EAA9FF2ED2264300187E95 /* FirebaseCore in Frameworks */,
+				B2EAA9FC2ED2247600187E95 /* KeychainAccess in Frameworks */,
+				B2EAAA012ED2264300187E95 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B28E76032EC32E7D00D0CB8A = {
+		B2779A542ED20294006DAD28 = {
 			isa = PBXGroup;
 			children = (
-				B28E760E2EC32E7D00D0CB8A /* DocFlow */,
-				B28E760D2EC32E7D00D0CB8A /* Products */,
+				B2779A5F2ED20294006DAD28 /* pdfEditor */,
+				B2779A5E2ED20294006DAD28 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B28E760D2EC32E7D00D0CB8A /* Products */ = {
+		B2779A5E2ED20294006DAD28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B28E760C2EC32E7D00D0CB8A /* DocFlow.app */,
+				B2779A5D2ED20294006DAD28 /* pdfEditor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,76 +74,77 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B28E760B2EC32E7D00D0CB8A /* DocFlow */ = {
+		B2779A5C2ED20294006DAD28 /* pdfEditor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B28E761F2EC32E7E00D0CB8A /* Build configuration list for PBXNativeTarget "DocFlow" */;
+			buildConfigurationList = B2779A702ED20295006DAD28 /* Build configuration list for PBXNativeTarget "pdfEditor" */;
 			buildPhases = (
-				B28E76082EC32E7D00D0CB8A /* Sources */,
-				B28E76092EC32E7D00D0CB8A /* Frameworks */,
-				B28E760A2EC32E7D00D0CB8A /* Resources */,
+				B2779A592ED20294006DAD28 /* Sources */,
+				B2779A5A2ED20294006DAD28 /* Frameworks */,
+				B2779A5B2ED20294006DAD28 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B28E760E2EC32E7D00D0CB8A /* DocFlow */,
+				B2779A5F2ED20294006DAD28 /* pdfEditor */,
 			);
-			name = DocFlow;
+			name = pdfEditor;
 			packageProductDependencies = (
-				B28E77262EC4D54800D0CB8A /* ApphudSDK */,
-				B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */,
-				B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */,
-				B28E77392EC4D70300D0CB8A /* KeychainAccess */,
-				B24C8C022EC604B700832EA4 /* SnapKit */,
+				B2EAA9F52ED2243D00187E95 /* SnapKit */,
+				B2EAA9F82ED2245800187E95 /* ApphudSDK */,
+				B2EAA9FB2ED2247600187E95 /* KeychainAccess */,
+				B2EAA9FE2ED2264300187E95 /* FirebaseCore */,
+				B2EAAA002ED2264300187E95 /* FirebaseRemoteConfig */,
 			);
-			productName = DocFlow;
-			productReference = B28E760C2EC32E7D00D0CB8A /* DocFlow.app */;
+			productName = pdfEditor;
+			productReference = B2779A5D2ED20294006DAD28 /* pdfEditor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B28E76042EC32E7D00D0CB8A /* Project object */ = {
+		B2779A552ED20294006DAD28 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2610;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					B28E760B2EC32E7D00D0CB8A = {
-						CreatedOnToolsVersion = 26.0.1;
+					B2779A5C2ED20294006DAD28 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = B28E76072EC32E7D00D0CB8A /* Build configuration list for PBXProject "DocFlow" */;
+			buildConfigurationList = B2779A582ED20294006DAD28 /* Build configuration list for PBXProject "pdfEditor" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"Base 2",
+				"base 2",
 			);
-			mainGroup = B28E76032EC32E7D00D0CB8A;
+			mainGroup = B2779A542ED20294006DAD28;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */,
-				B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
-				B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */,
-				B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B2EAA9F42ED2243D00187E95 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B2EAA9F72ED2245800187E95 /* XCRemoteSwiftPackageReference "ApphudSDK" */,
+				B2EAA9FA2ED2247600187E95 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				B2EAA9FD2ED2264300187E95 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = B28E760D2EC32E7D00D0CB8A /* Products */;
+			productRefGroup = B2779A5E2ED20294006DAD28 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B28E760B2EC32E7D00D0CB8A /* DocFlow */,
+				B2779A5C2ED20294006DAD28 /* pdfEditor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B28E760A2EC32E7D00D0CB8A /* Resources */ = {
+		B2779A5B2ED20294006DAD28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -153,7 +154,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B28E76082EC32E7D00D0CB8A /* Sources */ = {
+		B2779A592ED20294006DAD28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -163,69 +164,63 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B28E76202EC32E7E00D0CB8A /* Debug */ = {
+		B2779A712ED20295006DAD28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DocFlow/Info.plist;
+				DEVELOPMENT_TEAM = ZX855577Y9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = pdfEditor/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.app.fake.bundle.DocFlow;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.fake.bundle.pdfEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		B28E76212EC32E7E00D0CB8A /* Release */ = {
+		B2779A722ED20295006DAD28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DocFlow/Info.plist;
+				DEVELOPMENT_TEAM = ZX855577Y9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = pdfEditor/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.app.fake.bundle.DocFlow;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.fake.bundle.pdfEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		B28E76222EC32E7E00D0CB8A /* Debug */ = {
+		B2779A732ED20295006DAD28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -277,19 +272,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		B28E76232EC32E7E00D0CB8A /* Release */ = {
+		B2779A742ED20295006DAD28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -335,12 +329,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -349,20 +342,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B28E76072EC32E7D00D0CB8A /* Build configuration list for PBXProject "DocFlow" */ = {
+		B2779A582ED20294006DAD28 /* Build configuration list for PBXProject "pdfEditor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B28E76222EC32E7E00D0CB8A /* Debug */,
-				B28E76232EC32E7E00D0CB8A /* Release */,
+				B2779A732ED20295006DAD28 /* Debug */,
+				B2779A742ED20295006DAD28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B28E761F2EC32E7E00D0CB8A /* Build configuration list for PBXNativeTarget "DocFlow" */ = {
+		B2779A702ED20295006DAD28 /* Build configuration list for PBXNativeTarget "pdfEditor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B28E76202EC32E7E00D0CB8A /* Debug */,
-				B28E76212EC32E7E00D0CB8A /* Release */,
+				B2779A712ED20295006DAD28 /* Debug */,
+				B2779A722ED20295006DAD28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -370,15 +363,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		B2EAA9F42ED2243D00187E95 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.7.1;
 			};
 		};
-		B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */ = {
+		B2EAA9F72ED2245800187E95 /* XCRemoteSwiftPackageReference "ApphudSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apphud/ApphudSDK";
 			requirement = {
@@ -386,23 +379,7 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/huri000/SwiftEntryKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.5.0;
-			};
-		};
-		B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+		B2EAA9FA2ED2247600187E95 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
@@ -410,35 +387,43 @@
 				kind = branch;
 			};
 		};
+		B2EAA9FD2ED2264300187E95 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B24C8C022EC604B700832EA4 /* SnapKit */ = {
+		B2EAA9F52ED2243D00187E95 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B24C8C012EC604B700832EA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = B2EAA9F42ED2243D00187E95 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		B28E77262EC4D54800D0CB8A /* ApphudSDK */ = {
+		B2EAA9F82ED2245800187E95 /* ApphudSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B28E77252EC4D54800D0CB8A /* XCRemoteSwiftPackageReference "ApphudSDK" */;
+			package = B2EAA9F72ED2245800187E95 /* XCRemoteSwiftPackageReference "ApphudSDK" */;
 			productName = ApphudSDK;
 		};
-		B28E772E2EC4D5A200D0CB8A /* SwiftEntryKit */ = {
+		B2EAA9FB2ED2247600187E95 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B28E772D2EC4D5A200D0CB8A /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
-			productName = SwiftEntryKit;
-		};
-		B28E77312EC4D67400D0CB8A /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B28E77302EC4D67400D0CB8A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-		B28E77392EC4D70300D0CB8A /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B28E77382EC4D70300D0CB8A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			package = B2EAA9FA2ED2247600187E95 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		B2EAA9FE2ED2264300187E95 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2EAA9FD2ED2264300187E95 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		B2EAAA002ED2264300187E95 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2EAA9FD2ED2264300187E95 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = B28E76042EC32E7D00D0CB8A /* Project object */;
+	rootObject = B2779A552ED20294006DAD28 /* Project object */;
 }
