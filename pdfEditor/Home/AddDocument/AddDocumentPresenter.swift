@@ -1,9 +1,5 @@
 import UIKit
 
-protocol AddDocumentViewProtocol: AnyObject {
-    func dismiss()
-}
-
 protocol AddDocumentPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapClose()
@@ -11,6 +7,7 @@ protocol AddDocumentPresenterProtocol: AnyObject {
 }
 
 protocol AddDocumentPresenterDelegate: AnyObject {
+    func addDocumentDidDismiss()
     func addDocumentDidSelectGallery()
     func addDocumentDidSelectFiles()
     func addDocumentDidSelectScan()
@@ -18,11 +15,9 @@ protocol AddDocumentPresenterDelegate: AnyObject {
 
 final class AddDocumentPresenter {
     
-    weak var view: AddDocumentViewProtocol?
     weak var delegate: AddDocumentPresenterDelegate?
     
-    init(view: AddDocumentViewProtocol, delegate: AddDocumentPresenterDelegate?) {
-        self.view = view
+    init(delegate: AddDocumentPresenterDelegate?) {
         self.delegate = delegate
     }
 }
@@ -34,11 +29,11 @@ extension AddDocumentPresenter: AddDocumentPresenterProtocol {
     }
     
     func didTapClose() {
-        view?.dismiss()
+        delegate?.addDocumentDidDismiss()
     }
     
     func didSelectOption(_ option: AddDocumentOption) {
-        view?.dismiss()
+        delegate?.addDocumentDidDismiss()
         
         switch option {
         case .gallery:

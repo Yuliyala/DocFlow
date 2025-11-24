@@ -104,6 +104,10 @@ extension TabBarController: CustomTabBarViewDelegate {
 }
 
 extension TabBarController: AddDocumentPresenterDelegate {
+    func addDocumentDidDismiss() {
+        dismiss(animated: true)
+    }
+    
     func addDocumentDidSelectGallery() {
         
     }

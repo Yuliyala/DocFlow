@@ -14,7 +14,7 @@ final class AddDocumentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = AddDocumentPresenter(view: self, delegate: delegate)
+        presenter = AddDocumentPresenter(delegate: self)
         addDocumentView.delegate = self
         
         presenter.viewDidLoad()
@@ -31,9 +31,21 @@ extension AddDocumentViewController: AddDocumentViewDelegate {
     }
 }
 
-extension AddDocumentViewController: AddDocumentViewProtocol {
-    func dismiss() {
+extension AddDocumentViewController: AddDocumentPresenterDelegate {
+    func addDocumentDidDismiss() {
         dismiss(animated: true)
+    }
+    
+    func addDocumentDidSelectGallery() {
+        delegate?.addDocumentDidSelectGallery()
+    }
+    
+    func addDocumentDidSelectFiles() {
+        delegate?.addDocumentDidSelectFiles()
+    }
+    
+    func addDocumentDidSelectScan() {
+        delegate?.addDocumentDidSelectScan()
     }
 }
 
