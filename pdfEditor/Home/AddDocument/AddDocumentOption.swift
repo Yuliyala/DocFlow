@@ -8,11 +8,11 @@ enum AddDocumentOption: CaseIterable {
     var icon: UIImage {
         switch self {
         case .gallery:
-            return .galleryIcon ?? UIImage(systemName: "photo.on.rectangle") ?? UIImage()
+            return .galleryIcon
         case .files:
-            return .folderIcon ?? UIImage(systemName: "folder") ?? UIImage()
+            return .folderIcon
         case .scan:
-            return .scan ?? UIImage(systemName: "scanner") ?? UIImage()
+            return .scan
         }
     }
     
