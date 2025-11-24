@@ -1,14 +1,14 @@
 import UIKit
 
-protocol MainViewProtocol: AnyObject {
-    func showEmptyState(_ show: Bool, type: MainView.EmptyStateType)
+protocol HomeViewProtocol: AnyObject {
+    func showEmptyState(_ show: Bool, type: HomeView.EmptyStateType)
     func showDocuments(_ documents: [Document])
     func setSearchMode(_ isSearching: Bool)
     func showLoading()
     func hideLoading()
 }
 
-protocol MainPresenterProtocol: AnyObject {
+protocol HomePresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTool(_ tool: PopularTool)
     func didTapAllDocuments()
@@ -18,9 +18,9 @@ protocol MainPresenterProtocol: AnyObject {
     func didEndSearch()
 }
 
-final class MainPresenter {
+final class HomePresenter {
     
-    weak var view: MainViewProtocol?
+    weak var view: HomeViewProtocol?
     
     private var documents: [Document] = []
     private var filteredDocuments: [Document] = []
@@ -33,7 +33,7 @@ final class MainPresenter {
         case favorites
     }
     
-    init(view: MainViewProtocol) {
+    init(view: HomeViewProtocol) {
         self.view = view
     }
     
@@ -71,7 +71,7 @@ final class MainPresenter {
             view?.showEmptyState(false, type: .noDocuments)
             view?.showDocuments([])
         } else if isEmpty {
-            let emptyStateType: MainView.EmptyStateType = currentSearchText.isEmpty ? .noDocuments : .searchNotFound
+            let emptyStateType: HomeView.EmptyStateType = currentSearchText.isEmpty ? .noDocuments : .searchNotFound
             view?.showEmptyState(true, type: emptyStateType)
             view?.showDocuments([])
         } else {
@@ -85,7 +85,7 @@ final class MainPresenter {
     }
 }
 
-extension MainPresenter: MainPresenterProtocol {
+extension HomePresenter: HomePresenterProtocol {
     
     func viewDidLoad() {
         loadDocuments()

@@ -7,7 +7,10 @@ protocol AddDocumentPresenterProtocol: AnyObject {
 }
 
 protocol AddDocumentPresenterDelegate: AnyObject {
-    func addDocumentDidDismiss()
+    func dismissAddDocument()
+}
+
+protocol AddDocumentModuleDelegate: AnyObject {
     func addDocumentDidSelectGallery()
     func addDocumentDidSelectFiles()
     func addDocumentDidSelectScan()
@@ -15,9 +18,10 @@ protocol AddDocumentPresenterDelegate: AnyObject {
 
 final class AddDocumentPresenter {
     
-    weak var delegate: AddDocumentPresenterDelegate?
+    weak var view: AddDocumentPresenterDelegate?
+    let delegate: AddDocumentModuleDelegate?
     
-    init(delegate: AddDocumentPresenterDelegate?) {
+    init(delegate: AddDocumentModuleDelegate?) {
         self.delegate = delegate
     }
 }
@@ -29,10 +33,12 @@ extension AddDocumentPresenter: AddDocumentPresenterProtocol {
     }
     
     func didTapClose() {
-        delegate?.addDocumentDidDismiss()
+        view?.dismissAddDocument()
     }
     
     func didSelectOption(_ option: AddDocumentOption) {
+        view?.dismissAddDocument()
+        
         switch option {
         case .gallery:
             delegate?.addDocumentDidSelectGallery()
@@ -41,8 +47,6 @@ extension AddDocumentPresenter: AddDocumentPresenterProtocol {
         case .scan:
             delegate?.addDocumentDidSelectScan()
         }
-        
-        delegate?.addDocumentDidDismiss()
     }
 }
 

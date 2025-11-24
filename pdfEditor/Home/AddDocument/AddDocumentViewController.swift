@@ -3,9 +3,19 @@ import UIKit
 final class AddDocumentViewController: UIViewController {
     
     private let addDocumentView = AddDocumentView()
-    private var presenter: AddDocumentPresenterProtocol!
+    private let presenter: AddDocumentPresenterProtocol
     
-    weak var delegate: AddDocumentPresenterDelegate?
+    init(delegate: AddDocumentModuleDelegate?) {
+        let presenter = AddDocumentPresenter(delegate: delegate)
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+        presenter.view = self
+        addDocumentView.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = addDocumentView
@@ -13,10 +23,6 @@ final class AddDocumentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        presenter = AddDocumentPresenter(delegate: self)
-        addDocumentView.delegate = self
-        
         presenter.viewDidLoad()
     }
 }
@@ -32,20 +38,8 @@ extension AddDocumentViewController: AddDocumentViewDelegate {
 }
 
 extension AddDocumentViewController: AddDocumentPresenterDelegate {
-    func addDocumentDidDismiss() {
+    func dismissAddDocument() {
         dismiss(animated: true)
-    }
-    
-    func addDocumentDidSelectGallery() {
-        delegate?.addDocumentDidSelectGallery()
-    }
-    
-    func addDocumentDidSelectFiles() {
-        delegate?.addDocumentDidSelectFiles()
-    }
-    
-    func addDocumentDidSelectScan() {
-        delegate?.addDocumentDidSelectScan()
     }
 }
 

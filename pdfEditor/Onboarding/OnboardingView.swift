@@ -140,15 +140,7 @@ class OnboardingView: UIView {
         mainImageView.image = onboarding.image
         titleLabel.text = onboarding.title
         descriptionLabel.text = onboarding.body
-        
-        switch onboarding {
-        case .first:
-            pageControl.currentPage = 0
-        case .second:
-            pageControl.currentPage = 1
-        case .third:
-            pageControl.currentPage = 2
-        }
+        pageControl.currentPage = onboarding.currentPage
         
         if mainImageView.image == nil {
             mainImageView.backgroundColor = .backgroundSecondary

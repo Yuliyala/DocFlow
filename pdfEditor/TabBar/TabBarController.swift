@@ -84,8 +84,7 @@ class TabBarController: UITabBarController {
     @objc private func addButtonTapped() {
         guard presentedViewController == nil else { return }
         
-        let addDocumentVC = AddDocumentViewController()
-        addDocumentVC.delegate = self
+        let addDocumentVC = AddDocumentViewController(delegate: self)
         
         let transitioningDelegate = CustomBottomSheetTransitioningDelegate(heightPercentage: 0.36)
         self.bottomSheetTransitioningDelegate = transitioningDelegate
@@ -103,11 +102,7 @@ extension TabBarController: CustomTabBarViewDelegate {
     }
 }
 
-extension TabBarController: AddDocumentPresenterDelegate {
-    func addDocumentDidDismiss() {
-        dismiss(animated: true)
-    }
-    
+extension TabBarController: AddDocumentModuleDelegate {
     func addDocumentDidSelectGallery() {
         
     }

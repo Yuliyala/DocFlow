@@ -1,17 +1,17 @@
 import UIKit
 import SnapKit
 
-protocol MainViewDelegate: AnyObject {
-    func mainViewDidTapTool(_ tool: PopularTool)
-    func mainViewDidTapAllDocuments()
-    func mainViewDidTapFavorites()
-    func mainViewDidChangeSearchText(_ text: String)
-    func mainViewDidBeginSearch()
-    func mainViewDidEndSearch()
+protocol HomeViewDelegate: AnyObject {
+    func homeViewDidTapTool(_ tool: PopularTool)
+    func homeViewDidTapAllDocuments()
+    func homeViewDidTapFavorites()
+    func homeViewDidChangeSearchText(_ text: String)
+    func homeViewDidBeginSearch()
+    func homeViewDidEndSearch()
 }
 
-class MainView: UIView {
-    weak var delegate: MainViewDelegate?
+class HomeView: UIView {
+    weak var delegate: HomeViewDelegate?
     
     private var selectedTab: DocumentTab = .allDocuments
     
@@ -322,7 +322,7 @@ class MainView: UIView {
               view.tag < PopularTool.allCases.count else { return }
         
         let tool = PopularTool.allCases[view.tag]
-        delegate?.mainViewDidTapTool(tool)
+        delegate?.homeViewDidTapTool(tool)
     }
     
     func showEmptyState(_ show: Bool, type: EmptyStateType = .noDocuments) {
@@ -375,34 +375,34 @@ class MainView: UIView {
     }
 }
 
-extension MainView: CustomSegmentedControlDelegate {
+extension HomeView: CustomSegmentedControlDelegate {
     func customSegmentedControl(_ control: CustomSegmentedControl, didSelectSegmentAt index: Int) {
         clearSearch()
         
         switch index {
         case 0:
             selectedTab = .allDocuments
-            delegate?.mainViewDidTapAllDocuments()
+            delegate?.homeViewDidTapAllDocuments()
         case 1:
             selectedTab = .favorites
-            delegate?.mainViewDidTapFavorites()
+            delegate?.homeViewDidTapFavorites()
         default:
             break
         }
     }
 }
 
-extension MainView: CustomSearchBarDelegate {
+extension HomeView: CustomSearchBarDelegate {
     func searchBar(_ searchBar: CustomSearchBar, textDidChange searchText: String) {
-        delegate?.mainViewDidChangeSearchText(searchText)
+        delegate?.homeViewDidChangeSearchText(searchText)
     }
     
     func searchBarDidBeginEditing(_ searchBar: CustomSearchBar) {
-        delegate?.mainViewDidBeginSearch()
+        delegate?.homeViewDidBeginSearch()
     }
     
     func searchBarDidEndEditing(_ searchBar: CustomSearchBar) {
-        delegate?.mainViewDidEndSearch()
+        delegate?.homeViewDidEndSearch()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: CustomSearchBar) {
@@ -411,7 +411,7 @@ extension MainView: CustomSearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: CustomSearchBar) {
         clearSearch()
-        delegate?.mainViewDidChangeSearchText("")
+        delegate?.homeViewDidChangeSearchText("")
     }
 }
 

@@ -3,61 +3,61 @@ import SnapKit
 
 final class HomeViewController: UIViewController {
     
-    private let mainView = MainView()
-    private var presenter: MainPresenterProtocol!
+    private let homeView = HomeView()
+    private var presenter: HomePresenterProtocol!
     
     override func loadView() {
-        view = mainView
+        view = homeView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        presenter = MainPresenter(view: self)
-        mainView.delegate = self
+        presenter = HomePresenter(view: self)
+        homeView.delegate = self
         
         presenter.viewDidLoad()
     }
 }
 
-extension HomeViewController: MainViewDelegate {
-    func mainViewDidTapTool(_ tool: PopularTool) {
+extension HomeViewController: HomeViewDelegate {
+    func homeViewDidTapTool(_ tool: PopularTool) {
         presenter.didTapTool(tool)
     }
     
-    func mainViewDidTapAllDocuments() {
+    func homeViewDidTapAllDocuments() {
         presenter.didTapAllDocuments()
     }
     
-    func mainViewDidTapFavorites() {
+    func homeViewDidTapFavorites() {
         presenter.didTapFavorites()
     }
     
-    func mainViewDidChangeSearchText(_ text: String) {
+    func homeViewDidChangeSearchText(_ text: String) {
         presenter.didChangeSearchText(text)
     }
     
-    func mainViewDidBeginSearch() {
+    func homeViewDidBeginSearch() {
         presenter.didBeginSearch()
     }
     
-    func mainViewDidEndSearch() {
+    func homeViewDidEndSearch() {
         presenter.didEndSearch()
     }
 }
 
-extension HomeViewController: MainViewProtocol {
-    func showEmptyState(_ show: Bool, type: MainView.EmptyStateType) {
-        mainView.showEmptyState(show, type: type)
+extension HomeViewController: HomeViewProtocol {
+    func showEmptyState(_ show: Bool, type: HomeView.EmptyStateType) {
+        homeView.showEmptyState(show, type: type)
     }
     
     func showDocuments(_ documents: [Document]) {
-        mainView.showDocuments(documents)
+        homeView.showDocuments(documents)
     }
     
     func setSearchMode(_ isSearching: Bool) {
-        mainView.setSearchMode(isSearching)
+        homeView.setSearchMode(isSearching)
     }
     
     func showLoading() {

@@ -38,15 +38,12 @@ enum Onboarding: CaseIterable {
         }
     }
     
-    var progress: CGFloat {
-        switch self {
-        case .first:
-            0.33
-        case .second:
-            0.66
-        case .third:
-            1.0
-        }
+    var currentPage: Int {
+        Onboarding.allCases.firstIndex(of: self) ?? 0
+    }
+    
+    static var totalPages: Int {
+        allCases.count
     }
     
     var next: Onboarding? {
