@@ -32,8 +32,6 @@ final class AddDocumentView: UIView {
         return button
     }()
     
-    private var optionCards: [AddDocumentOption: UIView] = [:]
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -64,13 +62,15 @@ final class AddDocumentView: UIView {
     }
     
     private func setupOptionCards() {
-        let galleryCard = createCard(for: .gallery)
-        let filesCard = createCard(for: .files)
-        let scanCard = createCard(for: .scan, fullWidth: true)
+        let galleryCard = AddDocumentOptionCard(option: .gallery)
+        let filesCard = AddDocumentOptionCard(option: .files)
+        let scanCard = AddDocumentOptionCard(option: .scan, fullWidth: true)
         
-        optionCards[.gallery] = galleryCard
-        optionCards[.files] = filesCard
-        optionCards[.scan] = scanCard
+        [galleryCard, filesCard, scanCard].forEach { card in
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cardTapped(_:)))
+            card.addGestureRecognizer(tapGesture)
+            card.isUserInteractionEnabled = true
+        }
         
         let topStackView = UIStackView(arrangedSubviews: [galleryCard, filesCard])
         topStackView.axis = .horizontal
@@ -94,87 +94,13 @@ final class AddDocumentView: UIView {
         }
     }
     
-    private func createCard(for option: AddDocumentOption, fullWidth: Bool = false) -> UIView {
-        let container = UIView()
-        container.backgroundColor = UIColor.white
-        container.layer.cornerRadius = 24
-        
-        let iconView = UIImageView(image: option.icon)
-        iconView.contentMode = .scaleAspectFit
-        iconView.tintColor = UIColor.accent
-        
-        let label = UILabel()
-        label.text = option.title
-        label.font = .zalandoSans(.medium, size: 16)
-        label.textColor = UIColor.textPrimary
-        
-        let arrowView = UIImageView(image: .arrowRight)
-        arrowView.contentMode = .scaleAspectFit
-        arrowView.tintColor = UIColor.textSecondary
-        
-        container.addSubview(iconView)
-        container.addSubview(label)
-        container.addSubview(arrowView)
-        
-        if fullWidth {
-            iconView.snp.makeConstraints {
-                $0.left.equalToSuperview().offset(16)
-                $0.centerY.equalToSuperview()
-                $0.width.height.equalTo(32)
-            }
-            
-            label.snp.makeConstraints {
-                $0.left.equalTo(iconView.snp.right).offset(12)
-                $0.centerY.equalToSuperview()
-            }
-            
-            arrowView.snp.makeConstraints {
-                $0.right.equalToSuperview().offset(-16)
-                $0.centerY.equalToSuperview()
-                $0.width.equalTo(8)
-                $0.height.equalTo(14)
-            }
-        } else {
-            iconView.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(20)
-                $0.left.equalToSuperview().offset(16)
-                $0.width.height.equalTo(32)
-            }
-            
-            label.snp.makeConstraints {
-                $0.top.equalTo(iconView.snp.bottom).offset(12)
-                $0.left.equalToSuperview().offset(16)
-                $0.right.equalToSuperview().offset(-16)
-            }
-            
-            arrowView.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(20)
-                $0.right.equalToSuperview().offset(-16)
-                $0.width.equalTo(8)
-                $0.height.equalTo(14)
-            }
-        }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cardTapped(_:)))
-        container.addGestureRecognizer(tapGesture)
-        container.isUserInteractionEnabled = true
-        container.tag = option.hashValue
-        
-        return container
-    }
-    
     @objc private func closeTapped() {
         delegate?.addDocumentViewDidTapClose()
     }
     
     @objc private func cardTapped(_ gesture: UITapGestureRecognizer) {
-        guard let view = gesture.view else { return }
-        
-        let option = AddDocumentOption.allCases.first { $0.hashValue == view.tag }
-        
-        if let option = option {
-            delegate?.addDocumentViewDidSelectOption(option)
-        }
+        guard let card = gesture.view as? AddDocumentOptionCard else { return }
+        delegate?.addDocumentViewDidSelectOption(card.option)
     }
 }
 

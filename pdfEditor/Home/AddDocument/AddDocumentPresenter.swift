@@ -33,8 +33,6 @@ extension AddDocumentPresenter: AddDocumentPresenterProtocol {
     }
     
     func didSelectOption(_ option: AddDocumentOption) {
-        delegate?.addDocumentDidDismiss()
-        
         switch option {
         case .gallery:
             delegate?.addDocumentDidSelectGallery()
@@ -43,6 +41,8 @@ extension AddDocumentPresenter: AddDocumentPresenterProtocol {
         case .scan:
             delegate?.addDocumentDidSelectScan()
         }
+        
+        delegate?.addDocumentDidDismiss()
     }
 }
 
