@@ -38,10 +38,9 @@ extension SettingsViewController: SettingsViewDelegate {
     }
     
     func settingsViewDidTapBanner() {
-        // TODO: Открыть правильный paywall (Trial или Limited) в зависимости от hasTrial
-        let trialVC = TrialViewController()
-        trialVC.modalPresentationStyle = .fullScreen
-        present(trialVC, animated: true)
+        let limitedVC = LimitedViewController()
+        limitedVC.modalPresentationStyle = .fullScreen
+        present(limitedVC, animated: true)
     }
     
     private func handleRestorePurchases() {
