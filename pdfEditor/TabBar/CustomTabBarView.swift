@@ -12,13 +12,13 @@ class CustomTabBarView: UIView {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .segmentBackground
+        view.backgroundColor = .backgroundTertiary
         let isPad = UIDevice.current.userInterfaceIdiom == .pad
         view.layer.cornerRadius = isPad ? 40 : 31
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.05
-        view.layer.shadowOffset = CGSize(width: 0, height: 4)
-        view.layer.shadowRadius = 8
+        view.layer.shadowOpacity = 0.15
+        view.layer.shadowOffset = CGSize(width: 0, height: 8)
+        view.layer.shadowRadius = 4
         view.layer.masksToBounds = false
         return view
     }()
@@ -94,14 +94,14 @@ class CustomTabBarView: UIView {
         
         let imageView = UIImageView(image: image.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .textSecondary
+        imageView.tintColor = .textPrimary
         imageView.tag = 100 + index
         
         let label = UILabel()
         label.text = title
         let fontSize: CGFloat = isPad ? 16 : 12
         label.font = .zalandoSans(.medium, size: fontSize)
-        label.textColor = .textSecondary
+        label.textColor = .textPrimary
         label.textAlignment = .center
         label.tag = 200 + index
         
@@ -153,8 +153,8 @@ class CustomTabBarView: UIView {
             
             let isSelected = view.tag == selectedIndex
             
-            imageView.tintColor = isSelected ? .accent : .textSecondary
-            label.textColor = isSelected ? .accent : .textSecondary
+            imageView.tintColor = isSelected ? .accent : .textPrimary
+            label.textColor = isSelected ? .accent : .textPrimary
             backgroundView.backgroundColor = isSelected ? .white : .clear
         }
     }

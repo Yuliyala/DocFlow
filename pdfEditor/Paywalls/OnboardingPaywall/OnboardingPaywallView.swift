@@ -66,13 +66,8 @@ class OnboardingPaywallView: UIView {
         return label
     }()
     
-    let continueButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("onboarding.button.continue", comment: ""), for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .zalandoSans(.medium, size: 16)
-        button.backgroundColor = .accent
-        button.layer.cornerRadius = 16
+    let continueButton: ActionButton = {
+        let button = ActionButton(style: .contained, title: NSLocalizedString("onboarding.button.continue", comment: ""))
         return button
     }()
     
@@ -94,7 +89,7 @@ class OnboardingPaywallView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = .background
+        backgroundColor = .backgroundPrimary
         
         addSubview(mainImageView)
         addSubview(closeButton)

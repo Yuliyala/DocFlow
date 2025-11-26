@@ -65,37 +65,25 @@ class ActionButton: UIButton {
             backgroundColor = .buttonDisabled
             setTitleColor(.textSecondary, for: .normal)
         case (.contained, .pressed):
-            backgroundColor = .buttonPrimary.withAlphaComponent(0.8)
+            backgroundColor = .buttonPrimary
             setTitleColor(.textTertiary, for: .normal)
             
         case (.secondary, .enabled):
-            backgroundColor = .backgroundSecondary
-            layer.borderWidth = 1
-            layer.borderColor = UIColor.buttonPrimary.cgColor
-            setTitleColor(.buttonPrimary, for: .normal)
+            backgroundColor = .buttonSecondary
+            setTitleColor(.accent, for: .normal)
         case (.secondary, .disabled):
-            backgroundColor = .backgroundSecondary
-            layer.borderWidth = 1
-            layer.borderColor = UIColor.buttonDisabled.cgColor
-            setTitleColor(.buttonDisabled, for: .normal)
+            backgroundColor = .buttonDisabled
+            setTitleColor(.textSecondary, for: .normal)
         case (.secondary, .pressed):
             backgroundColor = .buttonSecondary
-            layer.borderWidth = 1
-            layer.borderColor = UIColor.buttonPrimary.cgColor
-            setTitleColor(.buttonPrimary, for: .normal)
+            setTitleColor(.accent, for: .normal)
             
         case (.ghost, .enabled):
-            backgroundColor = .backgroundSecondary
-            layer.borderWidth = 0
-            setTitleColor(.buttonPrimary, for: .normal)
+            setTitleColor(.accent, for: .normal)
         case (.ghost, .disabled):
-            backgroundColor = .backgroundSecondary
-            layer.borderWidth = 0
-            setTitleColor(.buttonDisabled, for: .normal)
+            setTitleColor(.textSecondary, for: .normal)
         case (.ghost, .pressed):
-            backgroundColor = .buttonSecondary
-            layer.borderWidth = 0
-            setTitleColor(.buttonPrimary, for: .normal)
+            setTitleColor(.textSecondary, for: .normal)
         }
     }
     

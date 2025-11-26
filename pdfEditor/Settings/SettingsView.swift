@@ -57,7 +57,7 @@ class SettingsView: UIView {
     }
     
     private func setup() {
-        backgroundColor = UIColor.background
+        backgroundColor = .backgroundPrimary
         addSubview(navBar)
         addSubview(scrollView)
         scrollView.addSubview(stackView)

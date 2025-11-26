@@ -137,7 +137,7 @@ class SplashViewController: UIViewController {
     }
 
     private func setupUI() {
-        view.backgroundColor = .background
+        view.backgroundColor = .backgroundPrimary
         
         view.addSubview(welcomeLabel)
         view.addSubview(appNameLabel)

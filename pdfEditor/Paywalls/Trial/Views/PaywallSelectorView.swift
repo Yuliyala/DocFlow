@@ -134,7 +134,7 @@ class PaywallSelectorSection: RoundedShadowView {
     private lazy var infoBackground: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 24
-        view.backgroundColor = isMainInfoStyle ? .accent : .accentSecondary
+//        view.backgroundColor = isMainInfoStyle ? .accent : .accentSecondary
         return view
     }()
 

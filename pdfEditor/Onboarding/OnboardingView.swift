@@ -78,7 +78,7 @@ class OnboardingView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = .background
+        backgroundColor = .backgroundPrimary
         
         addSubview(mainImageView)
         addSubview(pageControlContainer)

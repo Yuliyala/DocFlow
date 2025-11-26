@@ -38,9 +38,9 @@ enum OnboardingPaywallType {
     var backgroundColor: UIColor {
         switch self {
         case .white:
-            return .background
+            return .backgroundPrimary
         case .grey:
-            return .backgroundSecondary
+            return .backgroundPrimary
         }
     }
     

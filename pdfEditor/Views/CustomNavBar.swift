@@ -6,7 +6,7 @@ class CustomNavBar: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .zalandoSans(.semiBold, size: 32)
-        label.textColor = UIColor.textPrimary
+        label.textColor = .textPrimary
         label.textAlignment = .left
         return label
     }()
@@ -28,7 +28,7 @@ class CustomNavBar: UIView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor.background
+        backgroundColor = .backgroundPrimary
         addSubview(titleLabel)
         addSubview(searchBar)
         

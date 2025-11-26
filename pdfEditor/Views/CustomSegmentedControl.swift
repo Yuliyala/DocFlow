@@ -13,7 +13,7 @@ final class CustomSegmentedControl: UIView {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.segmentBackground
+        view.backgroundColor = .backgroundTertiary
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         return view
@@ -79,7 +79,7 @@ final class CustomSegmentedControl: UIView {
             self.segmentButtons.enumerated().forEach { index, button in
                 let isSelected = index == self.selectedSegmentIndex
                 button.backgroundColor = isSelected ? .white : .clear
-                button.setTitleColor(isSelected ? UIColor.textPrimary : UIColor.textSecondary, for: .normal)
+                button.setTitleColor(UIColor.textPrimary, for: .normal)
             }
         }
     }
@@ -96,7 +96,7 @@ final class CustomSegmentedControl: UIView {
                 segmentButtons.enumerated().forEach { idx, button in
                     let isSelected = idx == selectedSegmentIndex
                     button.backgroundColor = isSelected ? .white : .clear
-                    button.setTitleColor(isSelected ? UIColor.textPrimary : UIColor.textSecondary, for: .normal)
+                    button.setTitleColor(UIColor.textPrimary, for: .normal)
                 }
             }
         }

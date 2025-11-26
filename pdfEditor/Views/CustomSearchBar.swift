@@ -15,7 +15,10 @@ final class CustomSearchBar: UIView {
     
     var placeholder: String = "" {
         didSet {
-            textField.placeholder = placeholder
+            textField.attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [.foregroundColor: UIColor.textSecondary]
+            )
         }
     }
     
@@ -26,7 +29,7 @@ final class CustomSearchBar: UIView {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.secondary
+        view.backgroundColor = .backgroundSecondary
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.strokePrimary.cgColor

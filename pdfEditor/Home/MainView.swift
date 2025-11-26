@@ -143,7 +143,7 @@ class HomeView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .background
+        backgroundColor = .backgroundPrimary
         
         addSubview(titleLabel)
         addSubview(searchBar)

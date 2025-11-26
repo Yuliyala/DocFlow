@@ -5,7 +5,7 @@ final class DocumentCell: UIView {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.secondary
+        view.backgroundColor = .backgroundSecondary
         view.layer.cornerRadius = 16
         return view
     }()
@@ -13,14 +13,14 @@ final class DocumentCell: UIView {
     private let iconView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = UIColor.accent
+        imageView.tintColor = .accent
         return imageView
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .zalandoSans(.medium, size: isPad ? 20 : 16)
-        label.textColor = UIColor.textPrimary
+        label.textColor = .textPrimary
         label.numberOfLines = 2
         return label
     }()
@@ -28,7 +28,7 @@ final class DocumentCell: UIView {
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.font = .zalandoSans(.regular, size: isPad ? 15 : 12)
-        label.textColor = UIColor.textSecondary
+        label.textColor = .textSecondary
         return label
     }()
     
@@ -37,7 +37,7 @@ final class DocumentCell: UIView {
         let iconSize: CGFloat = isPad ? 22 : 18
         let config = UIImage.SymbolConfiguration(pointSize: iconSize, weight: .medium)
         button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
-        button.tintColor = UIColor.textSecondary
+        button.tintColor = .iconPrimary
         return button
     }()
     

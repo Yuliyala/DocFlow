@@ -191,7 +191,7 @@ class LimitedView: UIView {
     }
 
     private func setupView() {
-        backgroundColor = .background
+//        backgroundColor = .background
         
         addSubview(checkedBackgroundView)
         addSubview(headerStackView)

@@ -42,7 +42,7 @@ final class AddDocumentView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = UIColor.primary
+        backgroundColor = UIColor.backgroundPrimary
         
         addSubview(titleLabel)
         addSubview(closeButton)
