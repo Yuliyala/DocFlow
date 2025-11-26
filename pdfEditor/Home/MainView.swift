@@ -48,13 +48,7 @@ class HomeView: UIView {
         return scrollView
     }()
     
-    private let contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 24
-        stackView.alignment = .fill
-        return stackView
-    }()
+    private let contentView = UIView()
     
     private let popularToolsLabel: UILabel = {
         let label = UILabel()
@@ -148,7 +142,7 @@ class HomeView: UIView {
         addSubview(titleLabel)
         addSubview(searchBar)
         addSubview(scrollView)
-        scrollView.addSubview(contentStackView)
+        scrollView.addSubview(contentView)
         
         [
             popularToolsLabel,
@@ -157,12 +151,7 @@ class HomeView: UIView {
             segmentedControl,
             documentsStackView,
             emptyStateView
-        ].forEach { contentStackView.addArrangedSubview($0) }
-        
-        contentStackView.setCustomSpacing(16, after: popularToolsLabel)
-        contentStackView.setCustomSpacing(4, after: toolsGridView)
-        contentStackView.setCustomSpacing(12, after: myDocumentsLabel)
-        contentStackView.setCustomSpacing(16, after: segmentedControl)
+        ].forEach { contentView.addSubview($0) }
         
         [emptyStateImageView, emptyStateLabel, emptyStateDescriptionLabel].forEach { emptyStateView.addSubview($0) }
         
@@ -187,32 +176,39 @@ class HomeView: UIView {
             $0.bottom.equalToSuperview().inset(50)
         }
         
-        contentStackView.snp.makeConstraints {
+        contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
         
         popularToolsLabel.snp.makeConstraints {
-            $0.height.equalTo(24)
+            $0.top.equalToSuperview()
             $0.left.right.equalToSuperview().inset(16)
+            $0.height.equalTo(24)
         }
         
         toolsGridView.snp.makeConstraints {
+            $0.top.equalTo(popularToolsLabel.snp.bottom).offset(16)
+            $0.left.equalToSuperview().inset(24)
             $0.height.equalTo(200)
         }
         
         myDocumentsLabel.snp.makeConstraints {
-            $0.height.equalTo(24)
+            $0.top.equalTo(toolsGridView.snp.bottom).offset(4)
             $0.left.right.equalToSuperview().inset(16)
+            $0.height.equalTo(24)
         }
         
         segmentedControl.snp.makeConstraints {
-            $0.height.equalTo(48)
+            $0.top.equalTo(myDocumentsLabel.snp.bottom).offset(12)
             $0.left.right.equalToSuperview().inset(16)
+            $0.height.equalTo(48)
         }
         
         documentsStackView.snp.makeConstraints {
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(16)
             $0.left.right.equalToSuperview().inset(16)
+            $0.bottom.lessThanOrEqualToSuperview().offset(-100)
         }
         
         let emptyStateHeight: CGFloat = isPad ? 400 : 300
@@ -223,8 +219,10 @@ class HomeView: UIView {
         let horizontalInset: CGFloat = isPad ? 48 : 32
         
         emptyStateView.snp.makeConstraints {
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(16)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(emptyStateHeight)
+            $0.bottom.lessThanOrEqualToSuperview().offset(-20)
         }
         
         emptyStateImageView.snp.makeConstraints {
@@ -248,7 +246,7 @@ class HomeView: UIView {
     private func setupToolsGrid(in container: UIView) {
         let tools = PopularTool.allCases
         let columns = 4
-        let spacing: CGFloat = 12
+        let spacing: CGFloat = 24
         let horizontalInset: CGFloat = 28
         
         for (index, tool) in tools.enumerated() {
