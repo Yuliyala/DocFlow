@@ -189,7 +189,7 @@ class HomeView: UIView {
         
         toolsGridView.snp.makeConstraints {
             $0.top.equalTo(popularToolsLabel.snp.bottom).offset(16)
-            $0.left.equalToSuperview().inset(24)
+            $0.left.equalToSuperview()
             $0.height.equalTo(200)
         }
         
@@ -246,8 +246,9 @@ class HomeView: UIView {
     private func setupToolsGrid(in container: UIView) {
         let tools = PopularTool.allCases
         let columns = 4
-        let spacing: CGFloat = 24
-        let horizontalInset: CGFloat = 28
+        let horizontalSpacing: CGFloat = 12
+        let verticalSpacing: CGFloat = 16
+        let horizontalInset: CGFloat = 16
         
         for (index, tool) in tools.enumerated() {
             let row = index / columns
@@ -257,13 +258,13 @@ class HomeView: UIView {
             container.addSubview(toolView)
             
             let totalHorizontalInsets = horizontalInset * 2
-            let totalSpacing = CGFloat(columns - 1) * spacing
+            let totalSpacing = CGFloat(columns - 1) * horizontalSpacing
             let availableWidth = UIScreen.main.bounds.width - totalHorizontalInsets - totalSpacing
             let itemWidth = availableWidth / CGFloat(columns)
             
             toolView.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(CGFloat(row) * (84 + spacing))
-                $0.left.equalToSuperview().offset(CGFloat(column) * (itemWidth + spacing))
+                $0.top.equalToSuperview().offset(CGFloat(row) * (84 + verticalSpacing))
+                $0.left.equalToSuperview().offset(horizontalInset + CGFloat(column) * (itemWidth + horizontalSpacing))
                 $0.width.equalTo(itemWidth)
                 $0.height.equalTo(84)
             }
