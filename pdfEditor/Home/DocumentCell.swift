@@ -21,13 +21,13 @@ final class DocumentCell: UIView {
         let label = UILabel()
         label.font = .zalandoSans(.medium, size: isPad ? 20 : 16)
         label.textColor = .textPrimary
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         return label
     }()
     
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = .zalandoSans(.regular, size: isPad ? 15 : 12)
+        label.font = .zalandoSans(.regular, size: isPad ? 16 : 14)
         label.textColor = .textSecondary
         return label
     }()
@@ -36,7 +36,7 @@ final class DocumentCell: UIView {
         let button = UIButton(type: .system)
         let iconSize: CGFloat = isPad ? 22 : 18
         let config = UIImage.SymbolConfiguration(pointSize: iconSize, weight: .medium)
-        button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
+        button.setImage(.moreButton, for: .normal)
         button.tintColor = .iconPrimary
         return button
     }()
@@ -57,36 +57,30 @@ final class DocumentCell: UIView {
         containerView.addSubview(infoLabel)
         containerView.addSubview(moreButton)
         
-        let cellHeight: CGFloat = isPad ? 110 : 88
         let horizontalInset: CGFloat = isPad ? 20 : 16
         let spacing: CGFloat = isPad ? 16 : 12
-        let verticalInset: CGFloat = isPad ? 20 : 16
-        let iconWidth: CGFloat = isPad ? 60 : 48
-        let iconHeight: CGFloat = isPad ? 70 : 56
+        let iconSize: CGFloat = isPad ? 84 : 64
         let buttonSize: CGFloat = isPad ? 32 : 24
         
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.height.equalTo(cellHeight)
         }
         
         iconView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(horizontalInset)
-            $0.centerY.equalToSuperview()
-            $0.width.equalTo(iconWidth)
-            $0.height.equalTo(iconHeight)
+            $0.left.top.bottom.equalToSuperview().inset(horizontalInset)
+            $0.width.height.equalTo(iconSize)
         }
         
         titleLabel.snp.makeConstraints {
             $0.left.equalTo(iconView.snp.right).offset(spacing)
-            $0.top.equalToSuperview().offset(verticalInset)
-            $0.right.equalTo(moreButton.snp.left).offset(-8)
+            $0.top.equalToSuperview().offset(isPad ? 32 : 24)
+            $0.right.equalTo(moreButton.snp.left).offset(-12)
         }
         
         infoLabel.snp.makeConstraints {
             $0.left.equalTo(iconView.snp.right).offset(spacing)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(isPad ? 6 : 4)
-            $0.right.equalTo(moreButton.snp.left).offset(-8)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(isPad ? 12 : 8)
+            $0.right.equalTo(moreButton.snp.left).offset(-12)
         }
         
         moreButton.snp.makeConstraints {

@@ -1,7 +1,21 @@
 {
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
   "identifier" : "pdfeditor_storekit",
-  "nonRenewingSubscriptions" : [],
-  "products" : [],
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
   "settings" : {
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
@@ -57,12 +71,18 @@
   "subscriptionGroups" : [
     {
       "id" : "21500975",
-      "localizations" : [],
+      "localizations" : [
+
+      ],
       "name" : "PDF Editor Premium",
       "subscriptions" : [
         {
-          "adHocOffers" : [],
-          "codeOffers" : [],
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "7.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -83,11 +103,18 @@
           "recurringSubscriptionPeriod" : "P1W",
           "referenceName" : "Weekly Premium",
           "subscriptionGroupID" : "21500975",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         },
         {
-          "adHocOffers" : [],
-          "codeOffers" : [],
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "19.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -104,11 +131,18 @@
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Monthly Premium",
           "subscriptionGroupID" : "21500975",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         },
         {
-          "adHocOffers" : [],
-          "codeOffers" : [],
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "5.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -129,14 +163,16 @@
           "recurringSubscriptionPeriod" : "P1W",
           "referenceName" : "Weekly Sale Premium",
           "subscriptionGroupID" : "21500975",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         }
       ]
     }
   ],
   "version" : {
-    "major" : 3,
+    "major" : 4,
     "minor" : 0
   }
 }
-
