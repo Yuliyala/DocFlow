@@ -45,10 +45,14 @@ class HomeView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.contentInset.bottom = 150
+        scrollView.scrollIndicatorInsets.bottom = 150
         return scrollView
     }()
     
     private let contentView = UIView()
+    
+    private let bottomBlurView = GradientBlurView()
     
     private let popularToolsLabel: UILabel = {
         let label = UILabel()
@@ -142,6 +146,7 @@ class HomeView: UIView {
         addSubview(titleLabel)
         addSubview(searchBar)
         addSubview(scrollView)
+        addSubview(bottomBlurView)
         scrollView.addSubview(contentView)
         
         [
@@ -174,6 +179,11 @@ class HomeView: UIView {
             $0.top.equalTo(searchBar.snp.bottom).offset(20)
             $0.left.right.equalToSuperview()
             $0.bottom.equalToSuperview().inset(50)
+        }
+        
+        bottomBlurView.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(150)
         }
         
         contentView.snp.makeConstraints {
