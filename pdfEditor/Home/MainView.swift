@@ -184,6 +184,7 @@ class HomeView: UIView {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(20)
             $0.left.right.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(50)
         }
         
         contentStackView.snp.makeConstraints {
