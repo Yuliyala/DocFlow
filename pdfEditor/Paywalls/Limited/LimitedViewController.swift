@@ -1,0 +1,128 @@
+import UIKit
+import StoreKit
+
+class LimitedViewController: UIViewController {
+    
+    var closeCallback: (() -> Void)?
+    var timer: Timer?
+    
+    private let appHudService: AppHudService = .shared
+    let rootView = LimitedView()
+    private var product: Product?
+    private var isLoading = false
+    
+    var forceGreyFlowMode: Bool?
+    var forceTrialMode: Bool?
+
+    override func loadView() {
+        view = rootView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegates()
+        setupTimer()
+        setupProduct()
+    }
+    
+    private func setupProduct() {
+        self.product = appHudService.storeProduct(for: appHudService.limitedProduct)
+        let weekProduct = appHudService.storeProduct(for: appHudService.allProductWeek)
+        let displayPrice = weekProduct?.displayPrice ?? "$7.99"
+        let dicsountDisplayPrice = product?.displayPrice ?? "$5.99"
+        
+        let price = weekProduct?.price ?? 0
+        let discountPrice = product?.price ?? 0
+        let discountPercentage = (price - discountPrice) / price * 100
+    
+        let trialDuration = appHudService.trialDuration(for: appHudService.limitedProduct)?.title ?? "3 Days"
+        let subscriptionDuration = appHudService.durationProduct(for: appHudService.limitedProduct)?.title ?? "week"
+        
+        // 🔧 ВРЕМЕННО: используем forceGreyFlowMode и forceTrialMode если они установлены
+        let isGreyFlow = forceGreyFlowMode ?? FirebaseService.shared.isGreyFlow
+        let hasTrial = forceTrialMode ?? appHudService.hasLimitedTrial
+        
+        rootView.configure(
+            discount: String(NSDecimalNumber(decimal: discountPercentage).int32Value),
+            price: displayPrice,
+            discountPrice: dicsountDisplayPrice,
+            expires: getCurrentTimerString(),
+            isGreyFlow: isGreyFlow,
+            hasTrial: hasTrial,
+            trialDuration: trialDuration,
+            subscriptionDuration: subscriptionDuration
+        )
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopTimer()
+    }
+    
+    deinit {
+        stopTimer()
+    }
+    
+    private func setupDelegates() {
+        rootView.setTermsDelegate(self)
+        
+        rootView.setupActions(
+            closeTarget: self,
+            closeAction: #selector(closeButtonTapped),
+            restoreTarget: self,
+            restoreAction: #selector(restoreButtonTapped),
+            continueTarget: self,
+            continueAction: #selector(continueButtonTapped(_:))
+        )
+    }
+    
+    @objc private func closeButtonTapped() {
+        if let closeCallback {
+            closeCallback()
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    @objc private func restoreButtonTapped() {
+        guard !isLoading else { return }
+        isLoading = true
+        Task { @MainActor in
+            if let error = await appHudService.restorePurchases() {
+                isLoading = false
+                presentRestorePurchasesFailureAlert(errorDescription: error.localizedDescription)
+            } else {
+                isLoading = false
+                self.dismiss(animated: true)
+            }
+        }
+    }
+    
+    @objc private func continueButtonTapped(_ sender: UIButton) {
+        animateButton(sender) {
+            guard !self.isLoading else { return }
+            self.isLoading = true
+            Task { @MainActor in
+                let result = await self.appHudService.makePurchase(product: self.appHudService.limitedProduct)
+                self.isLoading = false
+                if result {
+                    self.dismiss(animated: true)
+                } else {
+                    self.presentSubscriptionErrorAlert()
+                }
+            }
+        }
+    }
+}
+
+extension LimitedViewController: TermsTextViewDelegate {
+    func didTapTermsOfService() {
+        guard let url = Constants.termsOfServiceURL else { return }
+        presentInAppBrowser(with: url)
+    }
+    
+    func didTapPrivacyPolicy() {
+        guard let url = Constants.privacyPolicyURL else { return }
+        presentInAppBrowser(with: url)
+    }
+}
