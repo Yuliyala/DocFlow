@@ -41,12 +41,14 @@ class HomeView: UIView {
         return searchBar
     }()
     
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.contentInset.bottom = 150
-        scrollView.scrollIndicatorInsets.bottom = 150
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let bottomInset: CGFloat = isPad ? 130 : 110
+        scrollView.contentInset.bottom = bottomInset
+        scrollView.scrollIndicatorInsets.bottom = bottomInset
         return scrollView
     }()
     
@@ -181,9 +183,11 @@ class HomeView: UIView {
             $0.bottom.equalToSuperview().inset(50)
         }
         
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let blurHeight: CGFloat = isPad ? 130 : 110
         bottomBlurView.snp.makeConstraints {
             $0.left.right.bottom.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.height.equalTo(blurHeight)
         }
         
         contentView.snp.makeConstraints {
