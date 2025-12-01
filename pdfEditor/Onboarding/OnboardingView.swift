@@ -55,15 +55,8 @@ class OnboardingView: UIView {
         return label
     }()
 
-    lazy var continueButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("onboarding.button.continue", comment: ""), for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        let isPad = UIDevice.current.userInterfaceIdiom == .pad
-        let fontSize: CGFloat = isPad ? 20 : 16
-        button.titleLabel?.font = .zalandoSans(.medium, size: fontSize)
-        button.backgroundColor = .accent
-        button.layer.cornerRadius = isPad ? 20 : 16
+    lazy var continueButton: ActionButton = {
+        let button = ActionButton(style: .contained, title: NSLocalizedString("onboarding.button.continue", comment: ""))
         return button
     }()
 

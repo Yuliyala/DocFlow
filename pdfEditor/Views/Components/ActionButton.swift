@@ -50,8 +50,10 @@ class ActionButton: UIButton {
     }
     
     private func setupButton() {
-        titleLabel?.font = .zalandoSans(.medium, size: 16)
-        layer.cornerRadius = 28
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let fontSize: CGFloat = isPad ? 20 : 16
+        titleLabel?.font = .zalandoSans(.medium, size: fontSize)
+        layer.cornerRadius = isPad ? 20 : 16
         translatesAutoresizingMaskIntoConstraints = false
         updateAppearance()
     }
@@ -59,14 +61,14 @@ class ActionButton: UIButton {
     private func updateAppearance() {
         switch (buttonStyle, buttonState) {
         case (.contained, .enabled):
-            backgroundColor = .buttonPrimary
-            setTitleColor(.textTertiary, for: .normal)
+            backgroundColor = .accent
+            setTitleColor(.white, for: .normal)
         case (.contained, .disabled):
             backgroundColor = .buttonDisabled
             setTitleColor(.textSecondary, for: .normal)
         case (.contained, .pressed):
-            backgroundColor = .buttonPrimary
-            setTitleColor(.textTertiary, for: .normal)
+            backgroundColor = .accent
+            setTitleColor(.white, for: .normal)
             
         case (.secondary, .enabled):
             backgroundColor = .buttonSecondary
